@@ -1,0 +1,47 @@
+<div class="bg-[url('bed.jpg')] bg-cover h-screen">
+    <!-- <div class="absolute inset-0 bg-black/50 h-[110vh]"></div> -->
+    <div class="flex">
+        <div class="flex flex-col text-white font-bold p-32 pt-1 w-6/12 items-center justify-center">
+            <h3 class="text-5xl">There’s a smarter way to OYO around</h3>
+            <p>Sign up with your phone number and get exclusive access to discounts and savings on OYO stays and with
+                our many travel partners.</p>
+        </div>
+        <div>
+            <div class="min-h-screen  flex items-center justify-center w-[500px]">
+                <div class="w-full bg-white rounded-2xl shadow-xl p-8 space-y-6">
+
+                    <h2 class="text-2xl font-bold text-gray-800 text-center">Login With Your Account</h2>
+
+                    <form class="space-y-4" [formGroup]="loginForm">
+
+                        <!-- Email -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" placeholder="you@example.com" formControlName="email"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400" />
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input type="password" placeholder="••••••••" formControlName="password"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400" />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" (click)="login()"
+                                class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition duration-300">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+
+                    <p class="text-sm text-gray-500 text-center">Don't have an account? <a href="#"
+                            class="text-red-500 hover:underline" routerLink="/auth/register">Register Now</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

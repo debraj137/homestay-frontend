@@ -1,0 +1,26 @@
+<div class="p-6 bg-white rounded-xl shadow-md max-w-xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Book this Room</h2>
+
+  <form [formGroup]="bookingForm" class="space-y-4">
+
+    <div>
+      <label class="block text-gray-600 mb-1">Check-Out Date</label>
+      <input type="date" formControlName="checkOutDate" class="w-full border rounded p-2" />
+    </div>
+
+    <div>
+      <label class="block text-gray-600 mb-1">Check-Out Date</label>
+      <input type="date" formControlName="checkOutDate" class="w-full border rounded p-2" />
+    </div>
+
+    <div *ngIf="totalPrice > 0" class="text-green-600 font-semibold">
+      Total Price: ₹{{ totalPrice }}
+    </div>
+
+    <button type="submit" [disabled]="bookingForm.invalid"
+      class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded" (click)="bookRoom()">
+      Book Now
+    </button>
+
+  </form>
+</div>

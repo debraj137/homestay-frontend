@@ -1,0 +1,60 @@
+<div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md mt-10">
+  <h2 class="text-2xl font-bold mb-6">Add New Room</h2>
+
+  <form [formGroup]="roomForm" (ngSubmit)="submitRoom()" class="space-y-6">
+    <!-- Title -->
+    <div>
+      <label class="block mb-1 font-medium">Title</label>
+      <input formControlName="title" type="text" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label class="block mb-1 font-medium">Description</label>
+      <textarea formControlName="description" class="w-full p-2 border rounded-md"></textarea>
+    </div>
+
+    <!-- Location Fields -->
+    <div formGroupName="location">
+      <label class="block mb-2 font-semibold">Location</label>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input formControlName="addressLine1" placeholder="Address Line 1" class="p-2 border rounded-md w-full" />
+        <input formControlName="addressLine2" placeholder="Address Line 2" class="p-2 border rounded-md w-full" />
+        <input formControlName="city" placeholder="City" class="p-2 border rounded-md w-full" />
+        <input formControlName="state" placeholder="State" class="p-2 border rounded-md w-full" />
+        <input formControlName="pincode" placeholder="Pincode" class="p-2 border rounded-md w-full" />
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label class="block mb-1 font-medium">Price (₹)</label>
+      <input formControlName="price" type="number" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <!-- Images -->
+    <div>
+      <label class="block mb-2 font-semibold">Images (URLs)</label>
+      <div *ngFor="let img of images.controls; let i = index" class="mb-2">
+        <input [formControl]="img" placeholder="Image URL" class="w-full p-2 border rounded-md" />
+      </div>
+      <button type="button" (click)="addImageField()" class="text-blue-500 mt-1">+ Add Image</button>
+    </div>
+
+    <!-- Amenities -->
+    <div>
+      <label class="block mb-2 font-semibold">Amenities</label>
+      <div *ngFor="let amenity of amenities.controls; let i = index" class="mb-2">
+        <input [formControl]="amenity" placeholder="Amenity (e.g. Wifi)" class="w-full p-2 border rounded-md" />
+      </div>
+      <button type="button" (click)="addAmenityField()" class="text-blue-500 mt-1">+ Add Amenity</button>
+    </div>
+
+    <!-- Submit Button -->
+    <div>
+      <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md">
+        Add Room
+      </button>
+    </div>
+  </form>
+</div>
