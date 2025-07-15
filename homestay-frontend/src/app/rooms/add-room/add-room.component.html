@@ -50,6 +50,12 @@
       <button type="button" (click)="addAmenityField()" class="text-blue-500 mt-1">+ Add Amenity</button>
     </div>
 
+    <!-- Maximum Allowed Guest -->
+     <div>
+      <label class="block mb-2 font-semibold">Maximum Allowed Guests</label>
+      <input type="number" id="guests" class="form-control" formControlName="maximumAllowedGuest" min="1" class="w-full p-2 border rounded-md"/>
+     </div>
+
     <!-- Submit Button -->
     <div>
       <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md">

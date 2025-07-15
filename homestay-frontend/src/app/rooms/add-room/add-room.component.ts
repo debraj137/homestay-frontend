@@ -23,7 +23,8 @@ export class AddRoomComponent {
     }),
     price: [0, [Validators.required, Validators.min(1)]],
     images: this.fb.array([this.fb.control('')]),
-    amenities: this.fb.array([this.fb.control('')])
+    amenities: this.fb.array([this.fb.control('')]),
+    maximumAllowedGuest: [1, [Validators.required, Validators.min(1)]],
   });
 
   // get images(): FormArray {

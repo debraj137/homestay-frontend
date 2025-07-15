@@ -18,6 +18,7 @@
           <div class="flex flex-col">
             @if (authService.isAdmin) {
               <a href="#" class="hover:text-red-600" routerLink="/admin">Approve Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/admin">Approved Property</a>
             }
             @else if (authService.isOwner) {
               <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
