@@ -7,7 +7,8 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     ApprovedRoomComponent,
@@ -19,7 +20,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    MatInputModule,
   ]
 })
 export class BookingsModule { }

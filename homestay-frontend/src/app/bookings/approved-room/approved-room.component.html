@@ -1,40 +1,100 @@
 @if(rooms.length > 0){
-  <div class="min-h-screen bg-gray-100 py-10">
-  <h2 class="text-3xl font-bold text-center mb-10">Available Rooms</h2>
+<div class="container grid grid-cols-12 w-full">
+  <div class="col-span-3 bg-gray-100 border-r-2 h-auto">
+    <div class="p-10 mx-auto w-full">
+      <h3 class="text-xl font-semibold mb-4">Filters</h3>
 
-  <div class="max-w-2xl mx-auto space-y-6">
+      <!-- 💰 Price Range -->
+      <!-- 💰 Price Range with Slider -->
+      <div class="mb-6">
+        <label class="block text-gray-700 font-medium mb-2">Price (₹)</label>
 
-    @for (room of rooms; track $index) {
-          <!-- Room Card 1 -->
-    <div class="bg-white rounded-xl shadow-md overflow-hidden">
-      <img [src]="room.images[0]" alt="Room Image" class="w-full h-56 object-cover">
-      <div class="p-5">
-        <h3 class="text-xl font-bold text-gray-800">{{room.title}}</h3>
-        <p class="text-sm text-gray-500">{{room.location.city}}, {{room.location.state}}</p>
-        <p class="text-lg text-green-600 font-bold mt-2">₹{{room.price}} / night</p>
+        <!-- Show selected price -->
+        <div class="text-sm text-gray-600 mb-1">Up to ₹<span id="priceValue">2500</span></div>
 
-        <div class="flex flex-wrap gap-2 mt-2 text-sm text-gray-600">
-          @for (item of room.amenities; track $index) {
-            <span class="bg-gray-100 px-2 py-1 rounded">AC</span>
-          }
-<!--           
-          <span class="bg-gray-100 px-2 py-1 rounded">Wi-Fi</span>
-          <span class="bg-gray-100 px-2 py-1 rounded">TV</span> -->
-        </div>
+        <!-- Slider -->
+        <input type="range" min="500" max="5000" step="100" value="2500" id="priceRange" class="w-full accent-red-500"
+          oninput="document.getElementById('priceValue').innerText = this.value" />
+      </div>
 
-        <div class="mt-4 flex justify-between">
-          <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded" (click)="proceedToBookRoom(room._id!)">Book Now</button>
-          <button class="border border-red-600 text-red-600 px-4 py-2 rounded hover:bg-red-50">View Details</button>
+      <!-- 🛏️ Amenities -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-2">Amenities</label>
+        <div class="grid grid-cols-2 gap-2 text-sm">
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>Wi-Fi</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>AC</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>Parking</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>TV</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>Geyser</span>
+          </label>
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" class="accent-red-500" />
+            <span>Room Service</span>
+          </label>
         </div>
       </div>
-    </div>
-    }
 
+      <!-- Apply Button -->
+      <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 mt-4 rounded">
+        Apply Filters
+      </button>
+    </div>
+  </div>
+  <div class="col-span-9">
+    <div class="min-h-screen bg-gray-100 py-10">
+      <h2 class="text-3xl font-bold text-center mb-10">Available Rooms</h2>
+
+      <div class="max-w-2xl mx-auto space-y-6">
+
+        @for (room of rooms; track $index) {
+        <!-- Room Card 1 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <img [src]="room.images[0]" alt="Room Image" class="w-full h-56 object-cover">
+          <div class="p-5">
+            <h3 class="text-xl font-bold text-gray-800">{{room.title}}</h3>
+            <p class="text-sm text-gray-500">{{room.location.city}}, {{room.location.state}}</p>
+            <p class="text-lg text-green-600 font-bold mt-2">₹{{room.price}} / night</p>
+
+            <div class="flex flex-wrap gap-2 mt-2 text-sm text-gray-600">
+              @for (item of room.amenities; track $index) {
+              <span class="bg-gray-100 px-2 py-1 rounded">AC</span>
+              }
+              <!--           
+          <span class="bg-gray-100 px-2 py-1 rounded">Wi-Fi</span>
+          <span class="bg-gray-100 px-2 py-1 rounded">TV</span> -->
+            </div>
+
+            <div class="mt-4 flex justify-between">
+              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+                (click)="proceedToBookRoom(room._id!)">Book Now</button>
+              <button class="border border-red-600 text-red-600 px-4 py-2 rounded hover:bg-red-50">View Details</button>
+            </div>
+          </div>
+        </div>
+        }
+
+      </div>
+    </div>
   </div>
 </div>
+
 }
 @else {
-  <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-6 text-center">
+<div class="min-h-screen flex flex-col items-center justify-center bg-gray-100 px-6 text-center">
   <img src="https://cdn-icons-png.flaticon.com/512/7486/7486796.png" alt="No rooms" class="w-40 h-40 mb-6">
 
   <h2 class="text-3xl font-semibold text-gray-800 mb-2">Oops! No Rooms Available</h2>
@@ -43,10 +103,8 @@
     Try searching a different location.
   </p>
 
-  <button
-    class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded shadow"
-    (click)="goBackToHome()"
-  >
+  <button class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded shadow"
+    (click)="goBackToHome()">
     Back to Home
   </button>
 </div>

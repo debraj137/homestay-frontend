@@ -3,15 +3,31 @@
 
   <form [formGroup]="bookingForm" class="space-y-4">
 
-    <div>
+    <!-- <div>
       <label class="block text-gray-600 mb-1">Check-Out Date</label>
-      <input type="date" formControlName="checkOutDate" class="w-full border rounded p-2" />
+      <input type="date" formControlName="checkInDate" class="w-full border rounded p-2" (change)="onDateChange()" />
     </div>
 
     <div>
       <label class="block text-gray-600 mb-1">Check-Out Date</label>
       <input type="date" formControlName="checkOutDate" class="w-full border rounded p-2" />
     </div>
+    <div *ngIf="dateConflict" class="text-red-500 mt-2">
+      Selected dates overlap with existing bookings!
+    </div> -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Check-In Date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="checkInDate" [matDatepickerFilter]="filterDates">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Check-Out Date</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="checkOutDate" [matDatepickerFilter]="filterDates">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
 
     <div *ngIf="totalPrice > 0" class="text-green-600 font-semibold">
       Total Price: ₹{{ totalPrice }}
