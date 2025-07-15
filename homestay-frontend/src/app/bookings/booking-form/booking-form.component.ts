@@ -104,12 +104,31 @@ export class BookingFormComponent {
 
 
   // __define-ocg__ Disable specific booked dates
-  filterDates = (date: Date | null): boolean => {
-    if (!date) return true;
-    // return !this.disabledDates.has(new Date(d.setHours(0, 0, 0, 0)).getTime());
-    const normalized = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+  // filterDates = (date: Date | null): boolean => {
+  //   if (!date) return true;
+  //   // return !this.disabledDates.has(new Date(d.setHours(0, 0, 0, 0)).getTime());
+  //   const normalized = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
 
-    return !this.disabledDates.has(normalized);
+  //   return !this.disabledDates.has(normalized);
+  // };
+
+  filterDates = (date: Date | null): boolean => {
+    if (!date) return false;
+
+    const today = new Date();
+    const current = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+    const todayStripped = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+
+    const isPastDate = current < todayStripped;
+    const isBookedDate = this.disabledDates.has(current);
+
+    return !isPastDate && !isBookedDate;
+  };
+
+
+  dateClass = (date: Date): string => {
+    const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+    return this.disabledDates.has(normalizedDate) ? 'booked-date-tooltip' : '';
   };
 
 
