@@ -14,7 +14,11 @@ export class RoomService {
     return this.http.get<Room[]>(environment.apiUrl + '/rooms/owner');
   }
 
-  addRoom(room: Room){
-    return this.http.post(environment.apiUrl + '/rooms',room)
+  addRoom(room: Room) {
+    return this.http.post(environment.apiUrl + '/rooms', room)
+  }
+
+  getRoomById(roomId: string){
+    return this.http.post(environment.apiUrl + '/rooms/getById', { roomId });
   }
 }

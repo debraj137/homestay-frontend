@@ -12,5 +12,6 @@ export interface Room {
     price: number;
     images: string[];
     amenities: string[];
-    isApproved?: boolean
+    isApproved?: boolean;
+    maximumAllowedGuest: number
 }

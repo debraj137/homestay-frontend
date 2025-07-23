@@ -22,9 +22,9 @@ export class BookingService {
     })
   }
 
-  createBooking(roomId: string, checkInDate: Date, checkOutDate: Date, totalPrice: number) {
+  createBooking(roomId: string, checkInDate: Date, checkOutDate: Date, totalPrice: number, guestCount: number) {
     return this.http.post(environment.apiUrl + '/bookings', {
-      roomId, checkInDate, checkOutDate, totalPrice
+      roomId, checkInDate, checkOutDate, totalPrice, guestCount
     })
   }
 

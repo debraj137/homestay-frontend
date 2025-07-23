@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../booking.service';
+import { RoomService } from '../../rooms/room.service';
+import { Room } from '../../model/room';
 
 @Component({
   selector: 'app-booking-form',
@@ -17,19 +19,36 @@ export class BookingFormComponent {
   bookedDates: Date[] = [];
   bookings: any[] = [];
   disabledDates = new Set<number>();
-  constructor(private fb: FormBuilder, private bookingService: BookingService) { }
+  roomMaxGuests: number = 2;
+  room!: Room
+  constructor(private fb: FormBuilder, private bookingService: BookingService, private roomService: RoomService) { }
 
   ngOnInit(): void {
-    this.bookingForm = this.fb.group({
-      checkInDate: ['', Validators.required],
-      checkOutDate: ['', Validators.required]
-    });
     console.log(JSON.parse(localStorage.getItem('user') || '')._id);
     this.userId = JSON.parse(localStorage.getItem('user') || '')._id;
     this.roomId = localStorage.getItem('roomId');
+    this.roomService.getRoomById(this.roomId).subscribe((room: any) => {
+      this.room = room;
+      this.roomMaxGuests = room.maximumAllowedGuest || 2;
+    })
+
+    this.bookingForm = this.fb.group({
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
+      guestCount: [1, [Validators.required, Validators.min(1), this.guestLimitValidator()]]
+    });
+
 
     this.getBookedDates();
 
+  }
+
+  guestLimitValidator() {
+    return (control: any) => {
+      return control.value > this.roomMaxGuests
+        ? { maxGuestsExceeded: true }
+        : null;
+    };
   }
 
 
@@ -53,10 +72,17 @@ export class BookingFormComponent {
       payload.roomId,
       payload.checkInDate,
       payload.checkOutDate,
-      payload.totalPrice).subscribe(result => {
+      payload.totalPrice,
+      payload.guestCount,).subscribe(result => {
         console.log(result);
-        alert('Booking Confirmed')
-      })
+        alert('Booking Confirmed');
+      },
+        (err) => {
+          console.error('Booking failed:', err);
+          const errorMessage = err?.error?.message || 'Something went wrong. Please try again.';
+          alert('❌ Booking Failed: ' + errorMessage);
+        }
+      )
   }
 
   //  populateDisabledDates() {

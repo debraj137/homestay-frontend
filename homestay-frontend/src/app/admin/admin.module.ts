@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { ApproveRoomComponent } from './approve-room/approve-room.component';
+import { ApprovedRoomComponent } from './approved-room/approved-room.component';
 
 
 @NgModule({
   declarations: [
-    ApproveRoomComponent
+    ApproveRoomComponent,
+    ApprovedRoomComponent
   ],
   imports: [
     CommonModule,

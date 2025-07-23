@@ -29,11 +29,19 @@
       <mat-datepicker #picker2 [dateClass]="dateClass"></mat-datepicker>
     </mat-form-field>
 
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Number of Guests</mat-label>
+      <input type="number" matInput formControlName="guestCount" min="1" required />
+    </mat-form-field>
+    <div *ngIf="this.bookingForm.value['guestCount'].errors?.maxGuestsExceeded" class="text-red-500 text-sm mt-1">
+      Number of guests exceeds allowed limit ({{ roomMaxGuests }}).
+    </div>
+
     <div *ngIf="totalPrice > 0" class="text-green-600 font-semibold">
       Total Price: ₹{{ totalPrice }}
     </div>
 
-    <button type="submit" [disabled]="bookingForm.invalid"
+    <button type="submit"
       class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded" (click)="bookRoom()">
       Book Now
     </button>

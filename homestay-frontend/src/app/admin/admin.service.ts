@@ -19,4 +19,8 @@ export class AdminService {
   approveRoom(roomId:any){
     return this.http.patch(environment.apiUrl + '/admin/approve-room/' + roomId,{})
   }
+
+  approvedRoom(){
+    return this.http.get(environment.apiUrl + '/rooms')
+  }
 }
