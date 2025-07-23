@@ -23,4 +23,9 @@ export class AdminService {
   approvedRoom(){
     return this.http.get(environment.apiUrl + '/rooms')
   }
+
+  getOwnersWithRooms(){
+  return this.http.get<any[]>(environment.apiUrl + '/admin/owners-with-rooms');
+}
+
 }

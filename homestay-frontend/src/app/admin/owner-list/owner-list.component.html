@@ -1,0 +1,38 @@
+<mat-accordion class="w-full space-y-4">
+    <mat-expansion-panel *ngFor="let item of owners" class="rounded-xl shadow-md">
+        <mat-expansion-panel-header class="bg-gray-100">
+            <mat-panel-title>
+                👤 {{ item.owner.name }}
+            </mat-panel-title>
+            <mat-panel-description>
+                ✉️ {{ item.owner.email }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="item.rooms.length > 0; else noRooms" class="p-4 bg-white">
+            <div class="grid md:grid-cols-2 gap-4">
+                <mat-card *ngFor="let room of item.rooms" class="p-4 rounded-xl shadow-sm border border-gray-200">
+                    <mat-card-title class="text-lg font-semibold">{{ room.title }}</mat-card-title>
+                    <mat-card-content>
+                        <p class="text-gray-700 mb-2">{{ room.description }}</p>
+                        <p class="text-sm text-gray-500">
+                            💰 <strong>₹{{ room.price }}</strong> | 👥 Max Guests: {{ room.maximumAllowedGuest }}
+                        </p>
+                        <p *ngIf="room.location" class="text-sm text-gray-600 mt-1">
+                            📍 {{ room.location.addressLine1 }}, {{ room.location.city }}
+                        </p>
+                        <!-- ✅ Show Approval Status -->
+                        <p class="text-sm mt-2 font-medium"
+                            [ngClass]="room.isApproved ? 'text-green-600' : 'text-red-500'">
+                            {{ room.isApproved ? '✅ Approved' : '⏳ Pending Approval' }}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+        <ng-template #noRooms>
+            <p class="text-gray-500 italic p-4">No rooms listed by this owner.</p>
+        </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>
