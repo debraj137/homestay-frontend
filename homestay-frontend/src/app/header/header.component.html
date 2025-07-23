@@ -24,8 +24,12 @@
               </div>
             }
             @else if (authService.isOwner) {
-              <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
-              <p class="text-xs text-gray-500">Start earinig in 30 mins</p>
+              <div class="flex gap-8">
+                <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
+                <a href="#" class="hover:text-red-600" routerLink="/rooms/booked-room">Booked Property</a>
+              </div>
+              
+              
             }
             @else {
               <a class="hover:text-red-600 cursor-pointer" (click)="listProperty()">List Your Property</a>

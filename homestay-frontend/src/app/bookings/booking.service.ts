@@ -32,4 +32,8 @@ export class BookingService {
     return this.http.post(`${environment.apiUrl}/bookings/room-dates`,{roomId});
   }
 
+  getOwnerBookings() {
+  return this.http.get<any>(`${environment.apiUrl}/bookings/owner`);
+}
+
 }

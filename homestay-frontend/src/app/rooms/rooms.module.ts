@@ -6,13 +6,15 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BookedRoomComponent } from './booked-room/booked-room.component';
 
 
 @NgModule({
   declarations: [
     RoomListComponent,
     RoomDetailComponent,
-    AddRoomComponent
+    AddRoomComponent,
+    BookedRoomComponent
   ],
   imports: [
     CommonModule,
