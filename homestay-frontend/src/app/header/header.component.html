@@ -1,10 +1,10 @@
-<nav class="bg-white shadow sticky top-0 z-50"> 
+<nav class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
 
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-2">
-        <img src="stay.png" alt="STAY Logo" class="h-16 w-auto" /> 
+        <img src="stay.png" alt="STAY Logo" class="h-16 w-auto" />
       </a>
 
       <!-- Desktop Menu -->
@@ -17,25 +17,35 @@
           </svg>
           <div class="flex flex-col">
             @if (authService.isAdmin) {
-              <div class="flex gap-8">
-                <a href="#" class="hover:text-red-600" routerLink="/admin">Approve Property</a>
-                <a href="#" class="hover:text-red-600" routerLink="/admin/approved-room">Approved Property</a>
-                <a href="#" class="hover:text-red-600" routerLink="/admin/owner-list">Owner List</a>
-              </div>
+            <div class="flex gap-8">
+              <a href="#" class="hover:text-red-600" routerLink="/admin">Approve Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/admin/approved-room">Approved Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/admin/owner-list">Owner List</a>
+              <a href="#" class="hover:text-red-600" routerLink="/admin/all-booking">All Booking</a>
+            </div>
             }
             @else if (authService.isOwner) {
-              <div class="flex gap-8">
-                <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
-                <a href="#" class="hover:text-red-600" routerLink="/rooms/booked-room">Booked Property</a>
-              </div>
-              
-              
+            <div class="flex gap-8">
+              <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/rooms/booked-room">Booked Property</a>
+            </div>
+
+
             }
             @else {
-              <a class="hover:text-red-600 cursor-pointer" (click)="listProperty()">List Your Property</a>
-              <p class="text-xs text-gray-500">Start earinig in 30 mins</p>
-            }            
-            
+            <div class="flex gap-8">
+              <div>
+                <a class="hover:text-red-600 cursor-pointer" (click)="listProperty()">List Your Property</a>
+                <p class="text-xs text-gray-500">Start earinig in 30 mins</p>
+              </div>
+              <div>
+                <a class="hover:text-red-600 cursor-pointer" routerLink="/bookings/my-booking">My Booking</a>
+                <p class="text-xs text-gray-500">See your booked rooms</p>
+              </div>
+            </div>
+
+            }
+
           </div>
         </div>
         <div class="flex gap-2">
@@ -59,11 +69,11 @@
 
           <div class="flex flex-col">
             @if(authService.isLoggedIn){
-              <a href="#" class="hover:text-red-600" (click)="logout()">Logout</a>
+            <a href="#" class="hover:text-red-600" (click)="logout()">Logout</a>
             }
             @else {
-               <a href="#" class="hover:text-red-600" routerLink="/auth/login">Login / Signup</a>
-            }           
+            <a href="#" class="hover:text-red-600" routerLink="/auth/login">Login / Signup</a>
+            }
             <!-- <p class="text-xs text-gray-500">Start earinig in 30 mins</p> -->
           </div>
         </div>
@@ -72,18 +82,18 @@
   </div>
 </nav>
 <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-200">
-    <div class="flex justify-between items-center h-16">
-      <ul class="flex gap-20 mx-auto cursor-pointer">
-        <li (click)="randomFunc('Ayodhya')" class="cursor-pointer">Ayodhya</li>
-        <li (click)="randomFunc('Lucknow')">Lucknow</li>
-        <li (click)="randomFunc('Varanasi')">Varanasi</li>
-        <li (click)="randomFunc('Noida')">Noida</li>
-        <li (click)="randomFunc('Gorakhpur')">Gorakhpur</li>
-        <li (click)="randomFunc('Mathura')">Mathura</li>
-        <li (click)="randomFunc('Vrindavan')">Vrindavan</li>
-        <li (click)="randomFunc('Prayagraj')">Prayagraj</li>
-        <li (click)="randomFunc('Agra')">Agra</li>
-        <li (click)="randomFunc('Meerut')">Meerut</li>
-      </ul>
-    </div>
+  <div class="flex justify-between items-center h-16">
+    <ul class="flex gap-20 mx-auto cursor-pointer">
+      <li (click)="randomFunc('Ayodhya')" class="cursor-pointer">Ayodhya</li>
+      <li (click)="randomFunc('Lucknow')">Lucknow</li>
+      <li (click)="randomFunc('Varanasi')">Varanasi</li>
+      <li (click)="randomFunc('Noida')">Noida</li>
+      <li (click)="randomFunc('Gorakhpur')">Gorakhpur</li>
+      <li (click)="randomFunc('Mathura')">Mathura</li>
+      <li (click)="randomFunc('Vrindavan')">Vrindavan</li>
+      <li (click)="randomFunc('Prayagraj')">Prayagraj</li>
+      <li (click)="randomFunc('Agra')">Agra</li>
+      <li (click)="randomFunc('Meerut')">Meerut</li>
+    </ul>
+  </div>
 </div>

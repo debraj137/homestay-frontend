@@ -1,0 +1,37 @@
+<div *ngIf="roomData" class="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-lg space-y-6">
+  <h2 class="text-3xl font-bold text-gray-800 mb-4">{{ roomData.title }}</h2>
+
+  <!-- Main Image -->
+  <div class="w-full h-[400px] bg-gray-100 rounded-lg overflow-hidden">
+    <img [src]="selectedImage" alt="Main Room Image" class="w-full h-full object-cover transition duration-300" />
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="flex gap-4 mt-4 overflow-x-auto">
+    <img
+      *ngFor="let img of roomData.images"
+      [src]="img"
+      (click)="onImageClick(img)"
+      [class.border-blue-500]="img === selectedImage"
+      class="w-24 h-24 object-cover rounded cursor-pointer border-2 transition hover:scale-105"
+    />
+  </div>
+
+  <!-- Room Details -->
+  <div class="space-y-2 text-gray-700 text-lg mt-6">
+    <p>{{ roomData.description }}</p>
+    <p><strong>Location:</strong> {{ roomData.location?.city }}, {{ roomData.location?.state }}</p>
+    <p><strong>Price:</strong> ₹{{ roomData.price }}</p>
+    <p><strong>Amenities:</strong> {{ roomData.amenities?.join(', ') || 'N/A' }}</p>
+    <!-- <p>
+      <strong>Approved:</strong>
+      <span [ngClass]="roomData.isApproved ? 'text-green-600 font-semibold' : 'text-red-500 font-semibold'">
+        {{ roomData.isApproved ? 'Yes' : 'No' }}
+      </span>
+    </p> -->
+  </div>
+  <div class="mt-8 text-center">
+              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+                (click)="proceedToBookRoom(roomId)">Book Now</button>
+</div>
+</div>

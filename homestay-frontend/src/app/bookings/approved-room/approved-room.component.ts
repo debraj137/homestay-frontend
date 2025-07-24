@@ -49,6 +49,11 @@ export class ApprovedRoomComponent implements OnInit{
     this.router.navigateByUrl('/bookings/book-room');
   }
 
+  roomDetails(roomId:string){
+    localStorage.setItem('roomId',roomId);
+    this.router.navigateByUrl('/bookings/room-detail');
+  }
+
   goBackToHome(){
     this.router.navigateByUrl('/')
   }

@@ -29,11 +29,15 @@ export class BookingService {
   }
 
   getBookedDates(roomId: string) {
-    return this.http.post(`${environment.apiUrl}/bookings/room-dates`,{roomId});
+    return this.http.post(`${environment.apiUrl}/bookings/room-dates`, { roomId });
   }
 
   getOwnerBookings() {
-  return this.http.get<any>(`${environment.apiUrl}/bookings/owner`);
-}
+    return this.http.get<any>(`${environment.apiUrl}/bookings/owner`);
+  }
+
+  getUserBooking() {
+    return this.http.get<any>(`${environment.apiUrl}/bookings/my-bookings`);
+  }
 
 }

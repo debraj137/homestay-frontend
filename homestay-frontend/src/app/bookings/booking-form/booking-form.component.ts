@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingService } from '../booking.service';
 import { RoomService } from '../../rooms/room.service';
 import { Room } from '../../model/room';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -21,7 +22,11 @@ export class BookingFormComponent {
   disabledDates = new Set<number>();
   roomMaxGuests: number = 2;
   room!: Room
-  constructor(private fb: FormBuilder, private bookingService: BookingService, private roomService: RoomService) { }
+  constructor(
+    private fb: FormBuilder,
+    private bookingService: BookingService,
+    private roomService: RoomService,
+    private router: Router) { }
 
   ngOnInit(): void {
     console.log(JSON.parse(localStorage.getItem('user') || '')._id);
@@ -76,6 +81,7 @@ export class BookingFormComponent {
       payload.guestCount,).subscribe(result => {
         console.log(result);
         alert('Booking Confirmed');
+        this.router.navigateByUrl('/bookings/my-booking')
       },
         (err) => {
           console.error('Booking failed:', err);

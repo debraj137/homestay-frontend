@@ -10,12 +10,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { AllBookingComponent } from './all-booking/all-booking.component';
 
 @NgModule({
   declarations: [
     ApproveRoomComponent,
     ApprovedRoomComponent,
-    OwnerListComponent
+    OwnerListComponent,
+    AllBookingComponent
   ],
   imports: [
     CommonModule,

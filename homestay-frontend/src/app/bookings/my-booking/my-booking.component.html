@@ -1,0 +1,63 @@
+<div *ngIf="bookings && bookings.length > 0; else noBookings">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+        <div *ngFor="let booking of bookings"
+            class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform hover:-translate-y-1">
+            <!-- Room Image -->
+            <img [src]="booking.roomId?.images[0]" alt="Room Image" class="h-48 w-full object-cover" />
+
+            <div class="p-4 flex flex-col space-y-2">
+                <!-- Room Title -->
+                <h2 class="text-lg font-bold text-gray-800 truncate">
+                    {{ booking.roomId?.title }}
+                </h2>
+
+                <!-- Location -->
+                <p class="text-sm text-gray-600">
+                    📍 {{ booking.roomId?.location?.city }},
+                    {{ booking.roomId?.location?.state }}
+                </p>
+
+                <!-- Full Address -->
+                <p class="text-xs text-gray-500">
+                    {{ booking.roomId?.location?.addressLine1 }},
+                    {{ booking.roomId?.location?.addressLine2 }},
+                    {{ booking.roomId?.location?.pincode }}
+                </p>
+
+                <!-- Amenities -->
+                <div class="flex flex-wrap gap-2 mt-1 text-xs text-white">
+                    <span *ngFor="let amenity of booking.roomId?.amenities"
+                        class="bg-indigo-500 px-2 py-0.5 rounded-full">
+                        {{ amenity }}
+                    </span>
+                </div>
+
+                <!-- Dates & Guests -->
+                <div class="text-sm text-gray-700 mt-3 space-y-1">
+                    <p>🗓️ <strong>Check-in:</strong> {{ booking.checkInDate | date: 'mediumDate' }}</p>
+                    <p>🗓️ <strong>Check-out:</strong> {{ booking.checkOutDate | date: 'mediumDate' }}</p>
+                    <p>👥 <strong>Guests:</strong> {{ booking.guestCount || booking.roomId?.maximumAllowedGuest }}</p>
+                </div>
+
+                <!-- Status + Price -->
+                <div class="flex justify-between items-center mt-4">
+                    <span class="text-xs px-3 py-1 rounded-full" [ngClass]="{
+            'bg-green-100 text-green-700': booking.status === 'confirmed',
+            'bg-yellow-100 text-yellow-800': booking.status === 'pending',
+            'bg-red-100 text-red-700': booking.status === 'cancelled'
+          }">
+                        {{ booking.status | titlecase }}
+                    </span>
+                    <span class="text-lg font-semibold text-indigo-600">
+                        ₹{{ booking.totalPrice }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noBookings>
+    <div class="text-center text-gray-500 mt-8 text-lg">
+        🙁 No bookings found!
+    </div>
+</ng-template>

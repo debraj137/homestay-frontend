@@ -9,10 +9,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MyBookingComponent } from './my-booking/my-booking.component';
+import { RoomDetailComponent } from './room-detail/room-detail.component';
 @NgModule({
   declarations: [
     ApprovedRoomComponent,
-    BookingFormComponent
+    BookingFormComponent,
+    MyBookingComponent,
+    RoomDetailComponent
   ],
   imports: [
     CommonModule,

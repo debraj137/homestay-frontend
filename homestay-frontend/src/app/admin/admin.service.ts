@@ -28,4 +28,8 @@ export class AdminService {
   return this.http.get<any[]>(environment.apiUrl + '/admin/owners-with-rooms');
 }
 
+  getAllBooking(){
+  return this.http.get<any[]>(environment.apiUrl + '/bookings/admin');
+}
+
 }
