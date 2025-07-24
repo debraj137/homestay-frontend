@@ -1,5 +1,5 @@
 <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md mt-10">
-  <h2 class="text-2xl font-bold mb-6">Add New Room</h2>
+  <h2 class="text-2xl font-bold mb-6">{{ isEditMode ? 'Edit Room' : 'Add New Room' }}</h2>
 
   <form [formGroup]="roomForm" (ngSubmit)="submitRoom()" class="space-y-6">
     <!-- Title -->
@@ -59,7 +59,7 @@
     <!-- Submit Button -->
     <div>
       <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md">
-        Add Room
+        {{ isEditMode ? 'Update Room' : 'Add Room' }}
       </button>
     </div>
   </form>

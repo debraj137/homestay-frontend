@@ -21,4 +21,8 @@ export class RoomService {
   getRoomById(roomId: string){
     return this.http.post(environment.apiUrl + '/rooms/getById', { roomId });
   }
+
+  updateRoom(roomData: any){
+    return this.http.put(`${environment.apiUrl}/rooms/update`, roomData);
+  }
 }

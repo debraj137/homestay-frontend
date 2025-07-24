@@ -7,6 +7,7 @@ import { BookedRoomComponent } from './booked-room/booked-room.component';
 const routes: Routes = [
   {path:'', component: RoomListComponent},
   {path:'add-room', component: AddRoomComponent},
+  { path: 'edit-room/:id', component: AddRoomComponent },
   {path:'booked-room', component: BookedRoomComponent},
 ];
 
