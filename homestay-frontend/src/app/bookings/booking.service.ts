@@ -40,4 +40,12 @@ export class BookingService {
     return this.http.get<any>(`${environment.apiUrl}/bookings/my-bookings`);
   }
 
+  filterRooms(payload: any) {
+    return this.http.post<Room[]>(environment.apiUrl + '/rooms/filter', payload);
+  }
+
+  getAmenities(){
+  return this.http.get<string[]>(`${environment.apiUrl}/rooms/amenities`);
+}
+
 }

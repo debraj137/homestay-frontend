@@ -1,59 +1,45 @@
 @if(rooms.length > 0){
 <div class="container grid grid-cols-12 w-full">
-  <div class="col-span-3 bg-gray-100 border-r-2 h-auto">
-    <div class="p-10 mx-auto w-full">
-      <h3 class="text-xl font-semibold mb-4">Filters</h3>
+ 
+    <div class="col-span-3 bg-gray-100 border-r-2 h-auto">
+       <form (ngSubmit)="applyFilters()" class="">
+      <div class="p-10 mx-auto w-full">
+        <h3 class="text-xl font-semibold mb-4">Filters</h3>
 
-      <!-- 💰 Price Range -->
-      <!-- 💰 Price Range with Slider -->
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-2">Price (₹)</label>
+        <!-- 💰 Price Range -->
+        <!-- 💰 Price Range with Slider -->
+        <div class="mb-6">
+          <label class="block text-gray-700 font-medium mb-2">Price (₹)</label>
 
-        <!-- Show selected price -->
-        <div class="text-sm text-gray-600 mb-1">Up to ₹<span id="priceValue">2500</span></div>
+          <!-- Show selected price -->
+          <!-- <div class="text-sm text-gray-600 mb-1">Up to ₹<span id="priceValue">2500</span></div> -->
 
-        <!-- Slider -->
-        <input type="range" min="500" max="5000" step="100" value="2500" id="priceRange" class="w-full accent-red-500"
-          oninput="document.getElementById('priceValue').innerText = this.value" />
-      </div>
-
-      <!-- 🛏️ Amenities -->
-      <div class="mb-4">
-        <label class="block text-gray-700 font-medium mb-2">Amenities</label>
-        <div class="grid grid-cols-2 gap-2 text-sm">
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>Wi-Fi</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>AC</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>Parking</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>TV</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>Geyser</span>
-          </label>
-          <label class="flex items-center space-x-2">
-            <input type="checkbox" class="accent-red-500" />
-            <span>Room Service</span>
-          </label>
+          <!-- Slider -->
+          <input type="range" min="500" max="5000" step="100" value="2500" id="priceRange" class="w-full accent-red-500"
+            oninput="document.getElementById('priceValue').innerText = this.value" [(ngModel)]="filter.maxPrice"
+            name="maxPrice" />
+          <div class="text-sm text-gray-600 mt-1">Up to ₹{{ filter.maxPrice }}</div>
         </div>
-      </div>
 
-      <!-- Apply Button -->
-      <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 mt-4 rounded">
-        Apply Filters
-      </button>
+        <!-- 🛏️ Amenities -->
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-2">Amenities</label>
+          <div class="grid grid-cols-2 gap-2 text-sm">
+            <label class="flex items-center space-x-2" *ngFor="let amenity of allAmenities">
+              <input type="checkbox" class="accent-red-500" [value]="amenity"
+                (change)="onAmenityToggle(amenity, $event)" [checked]="filter.selectedAmenities.includes(amenity)" />
+              <span>{{ amenity }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Apply Button -->
+        <button class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 mt-4 rounded">
+          Apply Filters
+        </button>
+      </div>
+    </form>
     </div>
-  </div>
   <div class="col-span-9">
     <div class="min-h-screen bg-gray-100 py-10">
       <h2 class="text-3xl font-bold text-center mb-10">Available Rooms</h2>
@@ -71,7 +57,7 @@
 
             <div class="flex flex-wrap gap-2 mt-2 text-sm text-gray-600">
               @for (item of room.amenities; track $index) {
-              <span class="bg-gray-100 px-2 py-1 rounded">AC</span>
+              <span class="bg-gray-100 px-2 py-1 rounded">{{item}}</span>
               }
               <!--           
           <span class="bg-gray-100 px-2 py-1 rounded">Wi-Fi</span>
@@ -81,7 +67,8 @@
             <div class="mt-4 flex justify-between">
               <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
                 (click)="proceedToBookRoom(room._id!)">Book Now</button>
-              <button class="border border-red-600 text-red-600 px-4 py-2 rounded hover:bg-red-50" (click)="roomDetails(room._id!)">View Details</button>
+              <button class="border border-red-600 text-red-600 px-4 py-2 rounded hover:bg-red-50"
+                (click)="roomDetails(room._id!)">View Details</button>
             </div>
           </div>
         </div>

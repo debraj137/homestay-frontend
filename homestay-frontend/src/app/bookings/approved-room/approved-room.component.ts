@@ -8,23 +8,27 @@ import { Router } from '@angular/router';
   templateUrl: './approved-room.component.html',
   styleUrl: './approved-room.component.scss'
 })
-export class ApprovedRoomComponent implements OnInit{
-  city!:string;
-  rooms:Room[] = [];
+export class ApprovedRoomComponent implements OnInit {
+  city!: string;
+  rooms: Room[] = [];
   amenities = []
-  constructor(private bookingService: BookingService, private router: Router){}
+  constructor(private bookingService: BookingService, private router: Router) { }
   ngOnInit(): void {
     // this.city = localStorage.getItem("city") || '';
     // this.getRoomFromServer();
     // console.log('city: ',this.city);
     this.bookingService.city$.subscribe(city => {
-    this.city = city;
-    this.getRoomFromServer();
-  });
-    
+      this.city = city;
+      this.getRoomFromServer();
+    });
+
+    this.bookingService.getAmenities().subscribe(
+    (data:any) => this.allAmenities = data,
+    (error:any) => console.error('Failed to fetch amenities:', error)
+  );
   }
 
- 
+
 
   private getRoomFromServer() {
     if (this.city?.length == 0) {
@@ -42,20 +46,49 @@ export class ApprovedRoomComponent implements OnInit{
     }
   }
 
-  proceedToBookRoom(roomId:string){
+  proceedToBookRoom(roomId: string) {
     console.log(roomId);
-    localStorage.setItem('roomId',roomId);
+    localStorage.setItem('roomId', roomId);
     console.log('clicked');
     this.router.navigateByUrl('/bookings/book-room');
   }
 
-  roomDetails(roomId:string){
-    localStorage.setItem('roomId',roomId);
+  roomDetails(roomId: string) {
+    localStorage.setItem('roomId', roomId);
     this.router.navigateByUrl('/bookings/room-detail');
   }
 
-  goBackToHome(){
+  goBackToHome() {
     this.router.navigateByUrl('/')
+  }
+
+  //filter search
+  filter = {
+    maxPrice: 2500,
+    selectedAmenities: [] as string[],
+  };
+
+  allAmenities = [];
+
+  onAmenityToggle(amenity: string, event: any) {
+    if (event.target.checked) {
+      this.filter.selectedAmenities.push(amenity);
+    } else {
+      this.filter.selectedAmenities = this.filter.selectedAmenities.filter(a => a !== amenity);
+    }
+  }
+
+  applyFilters() {
+    const payload = {
+      city: this.city,
+      maxPrice: this.filter.maxPrice,
+      amenities: this.filter.selectedAmenities,
+    };
+    console.log('payload in applyFilter: ',payload)
+    this.bookingService.filterRooms(payload).subscribe((result: any) => {
+      console.log('res in applyFilter: ',result)
+      this.rooms = result.rooms;
+    });
   }
 
 }

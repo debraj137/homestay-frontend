@@ -49,7 +49,7 @@ export class AuthService {
 
   get isOwner(){
     let userData = localStorage.getItem("user");
-    console.log('userData in authService: ',userData);
+    // console.log('userData in authService: ',userData);
     if(userData){
       return JSON.parse(userData).role == 'owner';
     }
