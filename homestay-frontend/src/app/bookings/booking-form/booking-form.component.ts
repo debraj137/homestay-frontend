@@ -69,11 +69,12 @@ export class BookingFormComponent {
     const payload = {
       roomId: this.roomId,
       ...this.bookingForm.value,
-      // userId: this.userId,
+      userId: this.userId,
       totalPrice: 1234
     };
     console.log('payload: ', payload);
     this.bookingService.createBooking(
+      payload.userId,
       payload.roomId,
       payload.checkInDate,
       payload.checkOutDate,
