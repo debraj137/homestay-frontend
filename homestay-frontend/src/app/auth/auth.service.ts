@@ -11,9 +11,9 @@ export class AuthService {
     private http: HttpClient
   ) { }
   // http = inject(HttpClient)
-  register(name:string,email:string,password:string, role: string){
+  register(name:string,email:string,mobileNumber: string,password:string, role: string){
     return this.http.post(environment.apiUrl + '/auth/register',{
-      name, email, password, role
+      name, email,mobileNumber, password, role
     })
   }
 

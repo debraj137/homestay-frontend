@@ -20,6 +20,7 @@ export class RegisterComponent {
   registrationForm = this.formbuilder.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
+    mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], // ✅ added with validation
     password: ['', [Validators.minLength(5)]]
   })
 
@@ -32,12 +33,12 @@ export class RegisterComponent {
     else {
       this.authService.role = 'user'
     }
-    this.authService.register(value.name!, value.email!, value.password!,this.authService.role).subscribe((result: any) => {
-        console.log('res in reg: ', result)
-        alert(result.message);
-        localStorage.removeItem('ownerReg');
-        this.router.navigateByUrl("/auth/login");
-      })
+    this.authService.register(value.name!, value.email!, value.mobileNumber!, value.password!, this.authService.role).subscribe((result: any) => {
+      console.log('res in reg: ', result)
+      alert(result.message);
+      localStorage.removeItem('ownerReg');
+      this.router.navigateByUrl("/auth/login");
+    })
 
   }
 }
