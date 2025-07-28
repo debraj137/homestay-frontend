@@ -5,13 +5,26 @@ import { RoomService } from '../../rooms/room.service';
 import { Room } from '../../model/room';
 import { Router } from '@angular/router';
 
+interface BookingErrorResponse {
+  success: boolean;
+  message: string;
+  nextAvailableCheckIn?: string;
+  availableBeforeBooking?: {
+    from: string;
+    to: string;
+  };
+}
+
+
 @Component({
   selector: 'app-booking-form',
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.scss'
 })
+
+
 export class BookingFormComponent {
-  //  @Input() room: any; // Receive room object as input
+  
   selectedDate: Date | null = null;
   roomId: any;
   userId: string = '';
@@ -22,6 +35,7 @@ export class BookingFormComponent {
   disabledDates = new Set<number>();
   roomMaxGuests: number = 2;
   room!: Room
+  bookingError?: BookingErrorResponse;
   constructor(
     private fb: FormBuilder,
     private bookingService: BookingService,
@@ -76,8 +90,8 @@ export class BookingFormComponent {
     this.bookingService.createBooking(
       payload.userId,
       payload.roomId,
-      payload.checkInDate,
-      payload.checkOutDate,
+      payload.checkInDate.setHours(12, 0, 0, 0),
+      payload.checkOutDate.setHours(12, 0, 0, 0),
       payload.totalPrice,
       payload.guestCount,).subscribe(result => {
         console.log(result);
@@ -86,30 +100,14 @@ export class BookingFormComponent {
       },
         (err) => {
           console.error('Booking failed:', err);
-          const errorMessage = err?.error?.message || 'Something went wrong. Please try again.';
-          alert('❌ Booking Failed: ' + errorMessage);
+          // const errorMessage = err?.error?.message || 'Something went wrong. Please try again.';
+          // alert('❌ Booking Failed: ' + errorMessage);
+          if (!err.error.success) {
+            this.bookingError = err.error;
+          }
         }
       )
   }
-
-  //  populateDisabledDates() {
-  //   this.disabledDates.clear(); // Reset previous data
-
-  //   for (const booking of this.bookings) {
-  //     const start = new Date(booking.checkInDate);
-  //     const end = new Date(booking.checkOutDate);
-
-  //     let current = new Date(start);
-
-  //     while (current <= end) {
-  //       const strippedDate = new Date(current.getFullYear(), current.getMonth(), current.getDate()).getTime();
-  //       this.disabledDates.add(strippedDate);
-  //       current.setDate(current.getDate() + 1);
-  //     }
-  //   }
-
-  //   console.log('📛 Disabled Dates:', Array.from(this.disabledDates).map(t => new Date(t).toDateString()));
-  // }
 
   populateDisabledDates() {
     this.disabledDates.clear(); // Reset previous data
@@ -124,6 +122,7 @@ export class BookingFormComponent {
         d.setDate(d.getDate() + 1)
       ) {
         const strippedDate = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+        console.log('strippedDate: ', strippedDate)
         this.disabledDates.add(strippedDate);
       }
     }
@@ -135,16 +134,6 @@ export class BookingFormComponent {
   }
 
 
-
-  // __define-ocg__ Disable specific booked dates
-  // filterDates = (date: Date | null): boolean => {
-  //   if (!date) return true;
-  //   // return !this.disabledDates.has(new Date(d.setHours(0, 0, 0, 0)).getTime());
-  //   const normalized = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-
-  //   return !this.disabledDates.has(normalized);
-  // };
-
   filterDates = (date: Date | null): boolean => {
     if (!date) return false;
 
@@ -155,13 +144,15 @@ export class BookingFormComponent {
     const isPastDate = current < todayStripped;
     const isBookedDate = this.disabledDates.has(current);
 
-    return !isPastDate && !isBookedDate;
+    // return !isPastDate && !isBookedDate;
+    return !isPastDate;
   };
 
 
   dateClass = (date: Date): string => {
-    const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-    return this.disabledDates.has(normalizedDate) ? 'booked-date-tooltip' : '';
+    // const normalizedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+    // return this.disabledDates.has(normalizedDate) ? 'booked-date-tooltip' : '';
+    return ''
   };
 
 

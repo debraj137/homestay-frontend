@@ -11,6 +11,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MyBookingComponent } from './my-booking/my-booking.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     ApprovedRoomComponent,
@@ -28,6 +29,7 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
     MatFormField,
     MatLabel,
     MatInputModule,
+    MatTooltipModule
   ]
 })
 export class BookingsModule { }

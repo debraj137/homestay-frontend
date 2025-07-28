@@ -15,7 +15,7 @@ randomFunc(e:any){
   console.log(typeof e);
   // localStorage.setItem('city',e);
   this.bookingService.citySubject.next(e);
-  debugger;
+  // debugger;
   console.log('clicked');
   this.router.navigateByUrl('/bookings')
 }
