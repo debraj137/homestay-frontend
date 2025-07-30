@@ -37,7 +37,11 @@ export class RegisterComponent {
       console.log('res in reg: ', result)
       alert(result.message);
       localStorage.removeItem('ownerReg');
-      this.router.navigateByUrl("/auth/login");
+      // store the email and mobile to verify later
+      localStorage.setItem('verifyEmail', value.email!);
+      localStorage.setItem('verifyMobile', value.mobileNumber!);
+      this.router.navigateByUrl("/auth/verify-otp"); // ✅ Navigate to new verification page
+      // this.router.navigateByUrl("/auth/login");
     })
 
   }

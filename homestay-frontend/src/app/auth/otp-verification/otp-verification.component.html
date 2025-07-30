@@ -1,0 +1,17 @@
+<div class="p-10 max-w-md mx-auto bg-white rounded shadow">
+  <h2 class="text-xl font-semibold mb-4">Verify Your Email & Mobile</h2>
+
+  <form [formGroup]="otpForm">
+    <div class="mb-4">
+      <label>Email OTP</label>
+      <input formControlName="emailOtp" class="w-full border p-2 rounded" placeholder="Enter email OTP">
+    </div>
+
+    <div class="mb-4">
+      <label>Mobile OTP</label>
+      <input formControlName="mobileOtp" class="w-full border p-2 rounded" placeholder="Enter mobile OTP">
+    </div>
+
+    <button (click)="verifyOtp()" class="bg-red-500 text-white px-4 py-2 rounded">Verify</button>
+  </form>
+</div>

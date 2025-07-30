@@ -11,48 +11,55 @@ export class AuthService {
     private http: HttpClient
   ) { }
   // http = inject(HttpClient)
-  register(name:string,email:string,mobileNumber: string,password:string, role: string){
-    return this.http.post(environment.apiUrl + '/auth/register',{
-      name, email,mobileNumber, password, role
+  register(name: string, email: string, mobileNumber: string, password: string, role: string) {
+    return this.http.post(environment.apiUrl + '/auth/register', {
+      name, email, mobileNumber, password, role
     })
   }
 
-  login(email:string,password:string){
-    return this.http.post(environment.apiUrl + '/auth/login',{
+  login(email: string, password: string) {
+    return this.http.post(environment.apiUrl + '/auth/login', {
       email, password
     })
   }
 
-  get isLoggedIn(){
+  get isLoggedIn() {
     let token = localStorage.getItem("token");
-    if(token){
+    if (token) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
   }
 
-   get isAdmin(){
+  get isAdmin() {
     let userData = localStorage.getItem("user");
     // console.log('userData in authService: ',userData);
-    if(userData){
+    if (userData) {
       return JSON.parse(userData).role == 'admin';
     }
     return false;
   }
 
-  get isOwner(){
+  get isOwner() {
     let userData = localStorage.getItem("user");
     // console.log('userData in authService: ',userData);
-    if(userData){
+    if (userData) {
       return JSON.parse(userData).role == 'owner';
     }
     return false;
   }
+
+  verifyOtp(email: string, mobile: string, emailOtp: string, mobileOtp: string) {
+    return this.http.post(environment.apiUrl + '/auth/verify-all-otp', {
+      email, mobile, emailOtp, mobileOtp
+    });
+  }
+
 }
