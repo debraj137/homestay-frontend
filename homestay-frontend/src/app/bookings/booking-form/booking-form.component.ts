@@ -155,5 +155,9 @@ export class BookingFormComponent {
     return ''
   };
 
+  clearBookingError() {
+  this.bookingError = undefined ;
+}
+
 
 }
