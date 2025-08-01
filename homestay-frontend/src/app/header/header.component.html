@@ -18,7 +18,7 @@
           <div class="flex flex-col">
             @if (authService.isAdmin) {
             <div class="flex gap-8">
-              <a href="#" class="hover:text-red-600" routerLink="/admin">Approve Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/admin">Pending Property</a>
               <a href="#" class="hover:text-red-600" routerLink="/admin/approved-room">Approved Property</a>
               <a href="#" class="hover:text-red-600" routerLink="/admin/owner-list">Owner List</a>
               <a href="#" class="hover:text-red-600" routerLink="/admin/all-booking">All Booking</a>
@@ -27,7 +27,7 @@
             @else if (authService.isOwner) {
             <div class="flex gap-8">
               <a href="#" class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
-              <a href="#" class="hover:text-red-600" routerLink="/rooms/booked-room">Booked Property</a>
+              <a href="#" class="hover:text-red-600" routerLink="/rooms/booked-room">Property List</a>
             </div>
 
 

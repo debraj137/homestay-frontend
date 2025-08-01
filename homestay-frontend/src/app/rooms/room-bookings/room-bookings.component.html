@@ -1,0 +1,26 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Bookings for Room</h2>
+
+  <table class="min-w-full text-left border border-gray-300">
+    <thead class="bg-blue-100">
+      <tr>
+        <th class="px-4 py-2">Customer Name</th>
+        <th class="px-4 py-2">Mobile</th>
+        <th class="px-4 py-2">Email</th>        
+        <th class="px-4 py-2">Check-In</th>
+        <th class="px-4 py-2">Check-Out</th>       
+        <th class="px-4 py-2">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookings" class="hover:bg-blue-50">
+        <td class="px-4 py-2">{{ booking.userId?.name || 'N/A' }}</td>
+        <td class="px-4 py-2">{{ booking.userId?.mobileNumber || '-' }}</td>
+        <td class="px-4 py-2">{{ booking.userId?.email || '-' }}</td>       
+        <td class="px-4 py-2">{{ booking.checkInDate | date }}</td>
+        <td class="px-4 py-2">{{ booking.checkOutDate | date }}</td>
+        <td class="px-4 py-2">{{ booking.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

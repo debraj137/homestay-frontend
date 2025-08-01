@@ -9,6 +9,7 @@ import { BookingService } from '../../bookings/booking.service';
 export class BookedRoomComponent {
   ownerRooms: any[] = [];
   bookings: any[] = [];
+  selectedRoomId: string | null = null;
   constructor(private bookingService: BookingService) { }
   ngOnInit() {
     this.bookingService.getOwnerBookings().subscribe(res => {
@@ -19,5 +20,13 @@ export class BookedRoomComponent {
   }
   getBookingsForRoom(roomId: string) {
     return this.bookings.filter(b => b.roomId?._id === roomId);
+  }
+
+  selectRoom(id: string): void {
+    this.selectedRoomId = id;
+  }
+
+  getFilteredBookings(): any[] {
+    return this.bookings.filter(b => b.roomId._id === this.selectedRoomId);
   }
 }

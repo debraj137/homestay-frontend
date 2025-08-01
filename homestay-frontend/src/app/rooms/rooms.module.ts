@@ -7,6 +7,7 @@ import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { AddRoomComponent } from './add-room/add-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookedRoomComponent } from './booked-room/booked-room.component';
+import { RoomBookingsComponent } from './room-bookings/room-bookings.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { BookedRoomComponent } from './booked-room/booked-room.component';
     RoomListComponent,
     RoomDetailComponent,
     AddRoomComponent,
-    BookedRoomComponent
+    BookedRoomComponent,
+    RoomBookingsComponent
   ],
   imports: [
     CommonModule,
