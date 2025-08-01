@@ -4,16 +4,15 @@
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Check-In Date</mat-label>
       <input matInput [matDatepicker]="picker1" formControlName="checkInDate" [matDatepickerFilter]="filterDates"
-      (focus)="clearBookingError()" (dateChange)="clearBookingError()"
-      >
+        (focus)="clearBookingError()" (dateChange)="clearBookingError()">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1 [dateClass]="dateClass" (opened)="clearBookingError()"></mat-datepicker >
+      <mat-datepicker #picker1 [dateClass]="dateClass" (opened)="clearBookingError()"></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Check-Out Date</mat-label>
       <input matInput [matDatepicker]="picker2" formControlName="checkOutDate" [matDatepickerFilter]="filterDates"
-      (focus)="clearBookingError()" (dateChange)="clearBookingError()">
+        (focus)="clearBookingError()" (dateChange)="clearBookingError()">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2 [dateClass]="dateClass" (opened)="clearBookingError()"></mat-datepicker>
     </mat-form-field>
@@ -52,8 +51,12 @@
 
     <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
       (click)="bookRoom()">
-      Book Now
+      Book
     </button>
+    <!-- <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+      (click)="proceedToCheckout()">
+      Proceed To Checkout
+    </button> -->
 
   </form>
 </div>

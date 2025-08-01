@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-xl rounded-2xl mt-10">
+  <h2 class="text-2xl font-bold mb-6 border-b pb-3">Checkout</h2>
+
+  <!-- Guest Details -->
+  <div class="mb-6">
+    <h3 class="text-lg font-semibold mb-4">Guest Information</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <input type="text" placeholder="Full Name" class="input-style" [(ngModel)]="guest.name" />
+      <input type="email" placeholder="Email Address" class="input-style" [(ngModel)]="guest.email" />
+      <input type="tel" placeholder="Mobile Number" class="input-style" [(ngModel)]="guest.mobile" />
+    </div>
+  </div>
+
+  <!-- Booking Summary -->
+  <div class="mb-6">
+    <h3 class="text-lg font-semibold mb-4">Booking Summary</h3>
+    <div class="bg-gray-100 p-4 rounded-lg">
+      <p><strong>Room:</strong> {{ booking.roomName }}</p>
+      <p><strong>Check-In:</strong> {{ booking.checkIn | date:'mediumDate' }}</p>
+      <p><strong>Check-Out:</strong> {{ booking.checkOut | date:'mediumDate' }}</p>
+      <p><strong>Total Nights:</strong> {{ booking.totalNights }}</p>
+      <p><strong>Total Price:</strong> ₹{{ booking.totalPrice }}</p>
+    </div>
+  </div>
+
+  <!-- Payment Info -->
+  <div class="mb-6">
+    <h3 class="text-lg font-semibold mb-4">Payment Method</h3>
+    <div class="flex gap-4">
+      <label class="flex items-center space-x-2">
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="card" />
+        <span>Credit / Debit Card</span>
+      </label>
+      <label class="flex items-center space-x-2">
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="upi" />
+        <span>UPI</span>
+      </label>
+      <label class="flex items-center space-x-2">
+        <input type="radio" name="payment" [(ngModel)]="paymentMethod" value="cod" />
+        <span>Pay at Hotel</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Confirm Button -->
+  <div class="text-right">
+    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200" (click)="confirmBooking()">
+      Confirm Booking
+    </button>
+  </div>
+</div>

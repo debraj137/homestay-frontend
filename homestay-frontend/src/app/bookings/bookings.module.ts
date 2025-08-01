@@ -12,12 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MyBookingComponent } from './my-booking/my-booking.component';
 import { RoomDetailComponent } from './room-detail/room-detail.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CheckoutComponent } from './checkout/checkout.component';
 @NgModule({
   declarations: [
     ApprovedRoomComponent,
     BookingFormComponent,
     MyBookingComponent,
-    RoomDetailComponent
+    RoomDetailComponent,
+    CheckoutComponent
   ],
   imports: [
     CommonModule,

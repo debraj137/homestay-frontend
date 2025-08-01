@@ -100,13 +100,15 @@ export class BookingFormComponent {
       },
         (err) => {
           console.error('Booking failed:', err);
-          // const errorMessage = err?.error?.message || 'Something went wrong. Please try again.';
-          // alert('❌ Booking Failed: ' + errorMessage);
           if (!err.error.success) {
             this.bookingError = err.error;
           }
         }
       )
+  }
+
+  proceedToCheckout(){
+    this.router.navigateByUrl('/bookings/checkout')
   }
 
   populateDisabledDates() {
