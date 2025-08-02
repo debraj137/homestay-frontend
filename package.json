@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.11"
+    "@angular/animations": "^20.1.4",
+    "@tailwindcss/postcss": "^4.1.11",
+    "ngx-toastr": "^17.0.2"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"

@@ -8,6 +8,7 @@ import { AddRoomComponent } from './add-room/add-room.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BookedRoomComponent } from './booked-room/booked-room.component';
 import { RoomBookingsComponent } from './room-bookings/room-bookings.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RoomBookingsComponent } from './room-bookings/room-bookings.component';
   imports: [
     CommonModule,
     RoomsRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ]
 })
 export class RoomsModule { }
