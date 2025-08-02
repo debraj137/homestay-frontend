@@ -24,7 +24,7 @@ interface BookingErrorResponse {
 
 
 export class BookingFormComponent {
-  
+
   selectedDate: Date | null = null;
   roomId: any;
   userId: string = '';
@@ -107,8 +107,38 @@ export class BookingFormComponent {
       )
   }
 
-  proceedToCheckout(){
-    this.router.navigateByUrl('/bookings/checkout')
+  proceedToCheckout() {
+    const payload = {
+      roomId: this.roomId,
+      ...this.bookingForm.value,
+    };
+     console.log('payload: ', payload);
+     this.bookingService.checkAvailability(
+      payload.roomId,
+      // payload.checkInDate.setHours(12, 0, 0, 0),
+      // payload.checkOutDate.setHours(12, 0, 0, 0), 
+      payload.checkInDate.setHours(12, 0, 0, 0),
+      payload.checkOutDate.setHours(12, 0, 0, 0),         
+      payload.guestCount
+     ).subscribe((result:any) => {
+        console.log(result);
+        if(result.success){
+          localStorage.setItem('roomDetails',JSON.stringify(result.roomDetails) );
+          localStorage.setItem('roomId',payload.roomId);
+          localStorage.setItem('checkInDate',payload.checkInDate.setHours(12, 0, 0, 0));
+          localStorage.setItem('checkOutDate',payload.checkOutDate.setHours(12, 0, 0, 0));
+          localStorage.setItem('guestCount',payload.guestCount);
+          this.router.navigateByUrl('/bookings/checkout')
+        }        
+      },
+        (err) => {
+          console.error('Booking failed:', err);
+          if (!err.error.success) {
+            this.bookingError = err.error;
+          }
+        }
+      )
+    
   }
 
   populateDisabledDates() {
@@ -158,8 +188,8 @@ export class BookingFormComponent {
   };
 
   clearBookingError() {
-  this.bookingError = undefined ;
-}
+    this.bookingError = undefined;
+  }
 
 
 }

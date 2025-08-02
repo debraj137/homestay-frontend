@@ -48,4 +48,10 @@ export class BookingService {
   return this.http.get<string[]>(`${environment.apiUrl}/rooms/amenities`);
 }
 
+checkAvailability(roomId: string, checkInDate: Date, checkOutDate: Date, guestCount: number){
+  return this.http.post(environment.apiUrl + '/bookings/check-availability', {
+      roomId, checkInDate, checkOutDate, guestCount
+    });
+}
+
 }

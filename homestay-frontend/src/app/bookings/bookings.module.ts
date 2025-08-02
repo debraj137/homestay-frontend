@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { BookingsRoutingModule } from './bookings-routing.module';
 import { ApprovedRoomComponent } from './approved-room/approved-room.component';
@@ -31,7 +31,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     MatFormField,
     MatLabel,
     MatInputModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DatePipe
   ]
 })
 export class BookingsModule { }

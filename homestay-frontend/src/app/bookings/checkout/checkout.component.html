@@ -3,11 +3,11 @@
 
   <!-- Guest Details -->
   <div class="mb-6">
-    <h3 class="text-lg font-semibold mb-4">Guest Information</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <input type="text" placeholder="Full Name" class="input-style" [(ngModel)]="guest.name" />
-      <input type="email" placeholder="Email Address" class="input-style" [(ngModel)]="guest.email" />
-      <input type="tel" placeholder="Mobile Number" class="input-style" [(ngModel)]="guest.mobile" />
+    <h3 class="text-lg font-semibold mb-4">Your Information</h3>
+    <div class="bg-gray-100 p-4 rounded-md">
+      <p><strong>Full Name:</strong> {{ user.name }}</p>
+      <p><strong>Email Address:</strong> {{ user.email }}</p>
+      <p><strong>Mobile Number:</strong> {{ user.mobile }}</p>
     </div>
   </div>
 
@@ -18,6 +18,7 @@
       <p><strong>Room:</strong> {{ booking.roomName }}</p>
       <p><strong>Check-In:</strong> {{ booking.checkIn | date:'mediumDate' }}</p>
       <p><strong>Check-Out:</strong> {{ booking.checkOut | date:'mediumDate' }}</p>
+      <p><strong>Guest Count:</strong> {{ booking.guestCount }}</p>
       <p><strong>Total Nights:</strong> {{ booking.totalNights }}</p>
       <p><strong>Total Price:</strong> ₹{{ booking.totalPrice }}</p>
     </div>
@@ -44,7 +45,8 @@
 
   <!-- Confirm Button -->
   <div class="text-right">
-    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-200" (click)="confirmBooking()">
+    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-200"
+      (click)="confirmBooking()">
       Confirm Booking
     </button>
   </div>

@@ -19,7 +19,7 @@
 
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>Number of Guests</mat-label>
-      <input type="number" matInput formControlName="guestCount" min="1" required />
+      <input type="number" matInput formControlName="guestCount" min="1" required (focus)="clearBookingError()"/>
     </mat-form-field>
     <div *ngIf="this.bookingForm.value['guestCount'].errors?.maxGuestsExceeded" class="text-red-500 text-sm mt-1">
       Number of guests exceeds allowed limit ({{ roomMaxGuests }}).
@@ -49,14 +49,14 @@
     </div>
     <!-- booking error end  -->
 
-    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+    <!-- <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
       (click)="bookRoom()">
       Book
-    </button>
-    <!-- <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+    </button> -->
+    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
       (click)="proceedToCheckout()">
       Proceed To Checkout
-    </button> -->
+    </button>
 
   </form>
 </div>
