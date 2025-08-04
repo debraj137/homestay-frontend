@@ -79,33 +79,33 @@ export class BookingFormComponent {
     });
   }
 
-  bookRoom() {
-    const payload = {
-      roomId: this.roomId,
-      ...this.bookingForm.value,
-      userId: this.userId,
-      totalPrice: 1234
-    };
-    console.log('payload: ', payload);
-    this.bookingService.createBooking(
-      payload.userId,
-      payload.roomId,
-      payload.checkInDate.setHours(12, 0, 0, 0),
-      payload.checkOutDate.setHours(12, 0, 0, 0),
-      payload.totalPrice,
-      payload.guestCount,).subscribe(result => {
-        console.log(result);
-        alert('Booking Confirmed');
-        this.router.navigateByUrl('/bookings/my-booking')
-      },
-        (err) => {
-          console.error('Booking failed:', err);
-          if (!err.error.success) {
-            this.bookingError = err.error;
-          }
-        }
-      )
-  }
+  // bookRoom() {
+  //   const payload = {
+  //     roomId: this.roomId,
+  //     ...this.bookingForm.value,
+  //     userId: this.userId,
+  //     totalPrice: 1234
+  //   };
+  //   console.log('payload: ', payload);
+  //   this.bookingService.createBooking(
+  //     payload.userId,
+  //     payload.roomId,
+  //     payload.checkInDate.setHours(12, 0, 0, 0),
+  //     payload.checkOutDate.setHours(12, 0, 0, 0),
+  //     payload.totalPrice,
+  //     payload.guestCount,).subscribe(result => {
+  //       console.log(result);
+  //       alert('Booking Confirmed');
+  //       this.router.navigateByUrl('/bookings/my-booking')
+  //     },
+  //       (err) => {
+  //         console.error('Booking failed:', err);
+  //         if (!err.error.success) {
+  //           this.bookingError = err.error;
+  //         }
+  //       }
+  //     )
+  // }
 
   proceedToCheckout() {
     const payload = {
