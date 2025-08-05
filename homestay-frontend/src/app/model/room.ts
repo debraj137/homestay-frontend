@@ -13,5 +13,6 @@ export interface Room {
     images: string[];
     amenities: string[];
     isApproved?: boolean;
-    maximumAllowedGuest: number
+    maximumAllowedGuest: number;
+    category: string;
 }

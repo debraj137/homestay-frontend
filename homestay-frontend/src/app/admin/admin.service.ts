@@ -14,22 +14,26 @@ export class AdminService {
     return this.http.get<Room[]>(environment.apiUrl + '/admin/pending-rooms');
   }
 
- // http://localhost:3000/admin/approve-room/6862d2525352c88cf83d86c5 patch
+  // http://localhost:3000/admin/approve-room/6862d2525352c88cf83d86c5 patch
 
-  approveRoom(roomId:any){
-    return this.http.patch(environment.apiUrl + '/admin/approve-room/' + roomId,{})
+  approveRoom(roomId: any) {
+    return this.http.patch(environment.apiUrl + '/admin/approve-room/' + roomId, {})
   }
 
-  approvedRoom(){
+  approvedRoom() {
     return this.http.get(environment.apiUrl + '/rooms')
   }
 
-  getOwnersWithRooms(){
-  return this.http.get<any[]>(environment.apiUrl + '/admin/owners-with-rooms');
-}
+  getOwnersWithRooms() {
+    return this.http.get<any[]>(environment.apiUrl + '/admin/owners-with-rooms');
+  }
 
-  getAllBooking(){
-  return this.http.get<any[]>(environment.apiUrl + '/bookings/admin');
-}
+  getAllBooking() {
+    return this.http.get<any[]>(environment.apiUrl + '/bookings/admin');
+  }
+
+  updateCategory(roomId: string, category: string) {
+    return this.http.patch(`${environment.apiUrl}/admin/category/${roomId}`, { category });
+  }
 
 }

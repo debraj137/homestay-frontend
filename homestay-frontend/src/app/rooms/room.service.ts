@@ -18,11 +18,23 @@ export class RoomService {
     return this.http.post(environment.apiUrl + '/rooms', room)
   }
 
-  getRoomById(roomId: string){
+  getRoomById(roomId: string) {
     return this.http.post(environment.apiUrl + '/rooms/getById', { roomId });
   }
 
-  updateRoom(roomData: any){
+  updateRoom(roomData: any) {
     return this.http.put(`${environment.apiUrl}/rooms/update`, roomData);
+  }
+
+  getGoldRoom() {
+    return this.http.get<Room[]>(environment.apiUrl + '/rooms/gold');
+  }
+
+  getSilverRoom() {
+    return this.http.get<Room[]>(environment.apiUrl + '/rooms/silver');
+  }
+
+  getDiamondRoom() {
+    return this.http.get<Room[]>(environment.apiUrl + '/rooms/diamond');
   }
 }

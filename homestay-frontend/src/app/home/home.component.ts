@@ -1,15 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingService } from '../bookings/booking.service';
+import { Room } from '../model/room';
+import { RoomService } from '../rooms/room.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  constructor(private router: Router, private bookingService: BookingService){
+export class HomeComponent implements OnInit{
+  goldrooms: Room[] = [];
+  silverrooms: Room[] = [];
+  diamondrooms: Room[] = [];
+  constructor(private router: Router, private bookingService: BookingService, private roomService: RoomService){
 
+  }
+  ngOnInit(): void {
+    this.getGoldRooms();
+    this.getSilverRooms();
+    this.getDiamondRooms();
   }
 randomFunc(e:any){
   console.log(typeof e);
@@ -18,5 +28,46 @@ randomFunc(e:any){
   // debugger;
   console.log('clicked');
   this.router.navigateByUrl('/bookings')
+}
+
+getGoldRooms(){
+  this.roomService.getGoldRoom().subscribe((res:any)=>{
+    console.log('res in gold room: ',res);
+    this.goldrooms = res
+  })
+}
+
+getSilverRooms(){
+  this.roomService.getSilverRoom().subscribe((res:any)=>{
+    console.log('res in gold room: ',res);
+    this.silverrooms = res
+  })
+}
+
+getDiamondRooms(){
+  this.roomService.getDiamondRoom().subscribe((res:any)=>{
+    console.log('res in gold room: ',res);
+    this.diamondrooms = res
+  })
+}
+
+room = {
+  id:'444',
+  images: ['https://images.oyoroomscdn.com/uploads/hotel_image/137/medium/5ca53ef34c55e884.jpg'],
+  title: 'Deluxe Golden Suite',
+  location: {
+    city: 'Noida',
+    state: 'Uttar Pradesh'
+  },
+  price: 2500,
+  amenities: ['Wi-Fi', 'AC', 'TV', 'Breakfast']
+};
+
+bookRoom(roomId: string) {
+  // Implement booking logic here
+}
+
+viewDetails(roomId: string) {
+  // Navigate or show modal with room details
 }
 }

@@ -11,6 +11,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { AllBookingComponent } from './all-booking/all-booking.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { AllBookingComponent } from './all-booking/all-booking.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     AdminRoutingModule,
     MatExpansionModule,
     MatCardModule,
     MatDividerModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule
   ]
 })
 export class AdminModule { }
