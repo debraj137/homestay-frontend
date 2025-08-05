@@ -36,10 +36,11 @@
       </div>
 
       <div *ngIf="bookingError.availableBeforeBooking">
-        ✅ Room is available from
+        <!-- ✅ Room is available from -->
+         ✅ Check-In is available from
         <strong>{{ bookingError.availableBeforeBooking.from }}</strong>
         to
-        <strong>{{ bookingError.availableBeforeBooking.to }}</strong>
+        <strong>{{  bookingError.availableBeforeBooking.to }}</strong>
       </div>
 
       <div *ngIf="bookingError.nextAvailableCheckIn">
