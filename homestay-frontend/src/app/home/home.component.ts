@@ -9,11 +9,12 @@ import { RoomService } from '../rooms/room.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
+  city: string = '';
   goldrooms: Room[] = [];
   silverrooms: Room[] = [];
   diamondrooms: Room[] = [];
-  constructor(private router: Router, private bookingService: BookingService, private roomService: RoomService){
+  constructor(private router: Router, private bookingService: BookingService, private roomService: RoomService) {
 
   }
   ngOnInit(): void {
@@ -21,53 +22,63 @@ export class HomeComponent implements OnInit{
     this.getSilverRooms();
     this.getDiamondRooms();
   }
-randomFunc(e:any){
-  console.log(typeof e);
-  // localStorage.setItem('city',e);
-  this.bookingService.citySubject.next(e);
-  // debugger;
-  console.log('clicked');
-  this.router.navigateByUrl('/bookings')
-}
 
-getGoldRooms(){
-  this.roomService.getGoldRoom().subscribe((res:any)=>{
-    console.log('res in gold room: ',res);
-    this.goldrooms = res
-  })
-}
+  isDisabled: boolean = true;
 
-getSilverRooms(){
-  this.roomService.getSilverRoom().subscribe((res:any)=>{
-    console.log('res in gold room: ',res);
-    this.silverrooms = res
-  })
-}
+  // onInput(value: string) {
+  //   console.log('value in onInput',value)
+  //   if(value.trim().length === 0){
+  //     this.isDisabled = true;
+  //   }
+  //   this.isDisabled = false;
+  // }
+  randomFunc(e: any) {
+    console.log(typeof e);
+    // localStorage.setItem('city',e);
+    this.bookingService.citySubject.next(e);
+    // debugger;
+    console.log('clicked');
+    this.router.navigateByUrl('/bookings')
+  }
 
-getDiamondRooms(){
-  this.roomService.getDiamondRoom().subscribe((res:any)=>{
-    console.log('res in gold room: ',res);
-    this.diamondrooms = res
-  })
-}
+  getGoldRooms() {
+    this.roomService.getGoldRoom().subscribe((res: any) => {
+      console.log('res in gold room: ', res);
+      this.goldrooms = res
+    })
+  }
 
-room = {
-  id:'444',
-  images: ['https://images.oyoroomscdn.com/uploads/hotel_image/137/medium/5ca53ef34c55e884.jpg'],
-  title: 'Deluxe Golden Suite',
-  location: {
-    city: 'Noida',
-    state: 'Uttar Pradesh'
-  },
-  price: 2500,
-  amenities: ['Wi-Fi', 'AC', 'TV', 'Breakfast']
-};
+  getSilverRooms() {
+    this.roomService.getSilverRoom().subscribe((res: any) => {
+      console.log('res in gold room: ', res);
+      this.silverrooms = res
+    })
+  }
 
-bookRoom(roomId: string) {
-  // Implement booking logic here
-}
+  getDiamondRooms() {
+    this.roomService.getDiamondRoom().subscribe((res: any) => {
+      console.log('res in gold room: ', res);
+      this.diamondrooms = res
+    })
+  }
 
-viewDetails(roomId: string) {
-  // Navigate or show modal with room details
-}
+  room = {
+    id: '444',
+    images: ['https://images.oyoroomscdn.com/uploads/hotel_image/137/medium/5ca53ef34c55e884.jpg'],
+    title: 'Deluxe Golden Suite',
+    location: {
+      city: 'Noida',
+      state: 'Uttar Pradesh'
+    },
+    price: 2500,
+    amenities: ['Wi-Fi', 'AC', 'TV', 'Breakfast']
+  };
+
+  bookRoom(roomId: string) {
+    // Implement booking logic here
+  }
+
+  viewDetails(roomId: string) {
+    // Navigate or show modal with room details
+  }
 }

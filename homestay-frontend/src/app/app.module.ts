@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FormsModule } from '@angular/forms';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -22,15 +23,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
   ],
   imports: [
     BrowserModule,
-    //  BrowserAnimationsModule, 
     AppRoutingModule,
     HttpClientModule,  
-    // MatSnackBarModule 
-    // ToastrModule.forRoot({
-    //   timeOut: 3000,
-    //   positionClass: 'toast-bottom-right',
-    //   preventDuplicates: true,
-    // })
+    FormsModule
   ],
   exports: [],
   providers: [
