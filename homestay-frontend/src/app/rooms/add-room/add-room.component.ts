@@ -43,7 +43,9 @@ export class AddRoomComponent implements OnInit {
     price: [0, [Validators.required, Validators.min(1)]],
     images: this.fb.array([this.fb.control('')]),
     amenities: this.fb.array([this.fb.control('')]),
-    maximumAllowedGuest: [1, [Validators.required, Validators.min(1)]],
+    // maximumAllowedGuest: [1, [Validators.required, Validators.min(1)]],
+    maximumAllowedAdult: [1, [Validators.required, Validators.min(1)]],
+    maximumAllowedChild: [0, [Validators.required, Validators.min(1)]],
   });
 
   // get images(): FormArray {
@@ -117,7 +119,9 @@ export class AddRoomComponent implements OnInit {
         pincode: room.location?.pincode
       },
       price: room.price,
-      maximumAllowedGuest: room.maximumAllowedGuest
+      // maximumAllowedGuest: room.maximumAllowedGuest,
+      maximumAllowedAdult: room.maximumAllowedAdult,
+      maximumAllowedChild: room.maximumAllowedChild
     });
 
     // Set images

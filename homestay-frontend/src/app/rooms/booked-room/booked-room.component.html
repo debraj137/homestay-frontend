@@ -5,15 +5,17 @@
     <thead class="bg-gray-100">
       <tr>
         <th class="px-4 py-2">Room Name</th>
-        <th class="px-4 py-2">Max Guests</th>
+        <th class="px-4 py-2">Max Allowed Adult</th>
+        <th class="px-4 py-2">Max Allowed Child</th>
         <th class="px-4 py-2">Price</th>
         <th class="px-4 py-2">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let room of ownerRooms" class="hover:bg-gray-50">
+      <tr *ngFor="let room of ownerRooms" class="hover:bg-gray-50 border-b border-gray-200">
         <td class="px-4 py-2">{{ room.title }}</td>
-        <td class="px-4 py-2">{{ room.maximumAllowedGuest }}</td>
+        <td class="px-4 py-2">{{ room.maximumAllowedAdult }}</td>
+        <td class="px-4 py-2">{{ room.maximumAllowedChild }}</td>
         <td class="px-4 py-2">₹{{ room.price }}</td>
         <td class="px-4 py-2">
           <button [routerLink]="['/rooms/view-booking', room._id]" class="text-blue-600 hover:underline">
@@ -37,7 +39,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let booking of getFilteredBookings()" class="hover:bg-blue-50">
+        <tr *ngFor="let booking of getFilteredBookings()" class="hover:bg-blue-50 border-b border-gray-200">
           <td class="px-4 py-2">{{ booking.userId?.name || 'N/A' }}</td>
           <td class="px-4 py-2">{{ booking.userId?.mobileNumber || '-' }}</td>
           <td class="px-4 py-2">{{ booking.checkInDate | date }}</td>

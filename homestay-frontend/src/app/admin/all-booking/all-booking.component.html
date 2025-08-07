@@ -12,7 +12,9 @@
             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Check-in</th>
             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Check-out</th>
-            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Guests</th>
+            <!-- <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Guests</th> -->
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Adult</th>
+            <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Child</th>
             <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Total Price</th>
             <!-- <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Approved</th> -->
           </tr>
@@ -30,7 +32,9 @@
             <td class="px-4 py-3">{{ booking.status }}</td>
             <td class="px-4 py-3">{{ booking.checkInDate | date:'mediumDate' }}</td>
             <td class="px-4 py-3">{{ booking.checkOutDate | date:'mediumDate' }}</td>
-            <td class="px-4 py-3">{{ booking.guestCount }}</td>
+            <!-- <td class="px-4 py-3">{{ booking.guestCount }}</td> -->
+            <td class="px-4 py-3">{{ booking.numberOfAdults }}</td>
+            <td class="px-4 py-3">{{ booking.numberOfChildren }}</td>
             <td class="px-4 py-3">₹{{ booking.totalPrice }}</td>
             <!-- <td class="px-4 py-3">
               <span [ngClass]="booking.roomId?.isApproved ? 'text-green-600' : 'text-red-600'">

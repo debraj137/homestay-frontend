@@ -1,8 +1,8 @@
 @if(rooms.length > 0){
 <div class="container grid grid-cols-12 w-full">
- 
-    <div class="col-span-3 bg-gray-100 border-r-2 h-auto">
-       <form (ngSubmit)="applyFilters()" class="">
+
+  <div class="col-span-3 bg-gray-100 border-r-2 h-auto">
+    <form (ngSubmit)="applyFilters()" class="">
       <div class="p-10 mx-auto w-full">
         <h3 class="text-xl font-semibold mb-4">Filters</h3>
 
@@ -39,7 +39,7 @@
         </button>
       </div>
     </form>
-    </div>
+  </div>
   <div class="col-span-9">
     <div class="min-h-screen bg-gray-100 py-10">
       <h2 class="text-3xl font-bold text-center mb-10">Available Rooms</h2>
@@ -54,6 +54,11 @@
             <h3 class="text-xl font-bold text-gray-800">{{room.title}}</h3>
             <p class="text-sm text-gray-500">{{room.location.city}}, {{room.location.state}}</p>
             <p class="text-lg text-green-600 font-bold mt-2">₹{{room.price}} / night</p>
+            <!-- Guests Info -->
+            <!-- <div class="text-sm text-gray-700 mt-1">
+              <p>👤 <strong>Max Adult Allowed:</strong> {{ room.maximumAllowedAdult }}</p>
+              <p>👤 <strong>Max Child Allowed:</strong> {{ room.maximumAllowedChild }}</p>
+            </div> -->
 
             <div class="flex flex-wrap gap-2 mt-2 text-sm text-gray-600">
               @for (item of room.amenities; track $index) {

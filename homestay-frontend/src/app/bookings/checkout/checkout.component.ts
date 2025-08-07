@@ -22,8 +22,10 @@ export class CheckoutComponent implements OnInit {
     roomName: 'Deluxe Suite',
     checkIn: '',
     checkOut: '',
-    guestCount: 0,
-    totalNights: 2,
+    // guestCount: 0,
+    adultCount: 0,
+    childCount: 0,
+    totalNights: 0,
     totalPrice: 3200
   };
 
@@ -40,7 +42,11 @@ export class CheckoutComponent implements OnInit {
     this.booking.roomName = JSON.parse(localStorage.getItem('roomDetails') || '').title;
     this.booking.checkIn = localStorage.getItem('checkInDate') || '';
     this.booking.checkOut = localStorage.getItem('checkOutDate') || '';
-    this.booking.guestCount = parseInt(localStorage.getItem('guestCount') || '');
+    // this.booking.guestCount = parseInt(localStorage.getItem('guestCount') || '');
+    this.booking.adultCount = parseInt(localStorage.getItem('adultCount') || '0');
+    this.booking.childCount = parseInt(localStorage.getItem('childCount') || '0');
+    console.log('this.booking.adultCount: ',this.booking.adultCount);
+    console.log('this.booking.childCount: ',this.booking.childCount);
     console.log('this.booking.checkIn: ', this.booking.checkIn)
     const checkInTimestamp = Number(this.booking.checkIn); // or parseInt()
     const checkOutTimestamp = Number(this.booking.checkOut);
@@ -66,7 +72,9 @@ export class CheckoutComponent implements OnInit {
     const payload = {
       userId: this.user.id,
       roomId: this.booking.roomId,
-      guestCount: this.booking.guestCount,
+      // guestCount: this.booking.guestCount,
+      numberOfAdults: this.booking.adultCount,
+      numberOfChildren: this.booking.childCount,
       checkInDate: this.booking.checkIn,
       checkOutDate: this.booking.checkOut,
       totalPrice: this.booking.totalPrice,
@@ -79,7 +87,9 @@ export class CheckoutComponent implements OnInit {
       payload.checkInDate,
       payload.checkOutDate,
       payload.totalPrice,
-      payload.guestCount,
+      // payload.guestCount,
+      payload.numberOfAdults,
+      payload.numberOfChildren,
       payload.mobileNumber).subscribe(result => {
         this.isLoading = false;
         console.log(result);

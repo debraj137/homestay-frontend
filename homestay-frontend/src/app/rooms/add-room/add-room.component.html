@@ -51,10 +51,22 @@
     </div>
 
     <!-- Maximum Allowed Guest -->
-     <div>
+    <!-- <div>
       <label class="block mb-2 font-semibold">Maximum Allowed Guests</label>
       <input type="number" id="guests" class="form-control" formControlName="maximumAllowedGuest" min="1" class="w-full p-2 border rounded-md"/>
-     </div>
+     </div> -->
+
+    <!-- Maximum Allowed Adults -->
+    <div>
+      <label class="block mb-2 font-semibold">Maximum Allowed Adults</label>
+      <input type="number" formControlName="maximumAllowedAdult" min="1" class="w-full p-2 border rounded-md" />
+    </div>
+
+    <!-- Maximum Allowed Children -->
+    <div>
+      <label class="block mb-2 font-semibold">Maximum Allowed Children</label>
+      <input type="number" formControlName="maximumAllowedChild" min="0" class="w-full p-2 border rounded-md" />
+    </div>
 
     <!-- Submit Button -->
     <div>

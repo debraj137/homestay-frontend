@@ -22,11 +22,27 @@ export class BookingService {
     })
   }
 
-  createBooking(userId: string, roomId: string, checkInDate: string, checkOutDate: string, totalPrice: number, guestCount: number,
+  createBooking(
+    userId: string,
+    roomId: string,
+    checkInDate: string,
+    checkOutDate: string,
+    totalPrice: number,
+    // guestCount: number,
+    numberOfAdults: number,
+    numberOfChildren: number,
     mobileNumber: string
   ) {
     return this.http.post(environment.apiUrl + '/bookings', {
-      userId, roomId, checkInDate, checkOutDate, totalPrice, guestCount, mobileNumber
+      userId,
+      roomId,
+      checkInDate,
+      checkOutDate,
+      totalPrice,
+      // guestCount,
+      numberOfAdults,
+      numberOfChildren,
+      mobileNumber
     })
   }
 
@@ -46,14 +62,22 @@ export class BookingService {
     return this.http.post<Room[]>(environment.apiUrl + '/rooms/filter', payload);
   }
 
-  getAmenities(){
-  return this.http.get<string[]>(`${environment.apiUrl}/rooms/amenities`);
-}
+  getAmenities() {
+    return this.http.get<string[]>(`${environment.apiUrl}/rooms/amenities`);
+  }
 
-checkAvailability(roomId: string, checkInDate: Date, checkOutDate: Date, guestCount: number){
-  return this.http.post(environment.apiUrl + '/bookings/check-availability', {
-      roomId, checkInDate, checkOutDate, guestCount
+  checkAvailability(
+    roomId: string,
+    checkInDate: Date,
+    checkOutDate: Date,
+    // guestCount: number,
+    adultCount: number,
+    childCount: number
+
+  ) {
+    return this.http.post(environment.apiUrl + '/bookings/check-availability', {
+      roomId, checkInDate, checkOutDate, adultCount, childCount
     });
-}
+  }
 
 }

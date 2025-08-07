@@ -54,21 +54,45 @@ export class BookingFormComponent {
     this.bookingForm = this.fb.group({
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
-      guestCount: [1, [Validators.required, Validators.min(1), this.guestLimitValidator()]]
-    });
+      // guestCount: [1, [Validators.required, Validators.min(1), this.guestLimitValidator()]]
+      adultCount: [1, [Validators.required, Validators.min(1)]],
+      childCount: [0, [Validators.required, Validators.min(0)]],
+    },
+      {
+        validators: this.totalGuestValidator()
+      });
 
 
     this.getBookedDates();
 
   }
 
-  guestLimitValidator() {
-    return (control: any) => {
-      return control.value > this.roomMaxGuests
-        ? { maxGuestsExceeded: true }
-        : null;
+
+  totalGuestValidator() {
+    return (group: FormGroup) => {
+      const adults = group.get('adultCount')?.value || 0;
+      const children = group.get('childCount')?.value || 0;
+
+      const maxAdults = this.room?.maximumAllowedAdult || 2;
+      const maxChildren = this.room?.maximumAllowedChild || 0;
+
+      if (adults > maxAdults || children > maxChildren) {
+        return { guestLimitExceeded: true };
+      }
+
+      return null;
     };
   }
+
+  // guestLimitValidator() {
+  //   return (control: any) => {
+  //     return control.value > this.roomMaxGuests
+  //       ? { maxGuestsExceeded: true }
+  //       : null;
+  //   };
+  // }
+
+
 
 
   private getBookedDates() {
@@ -112,33 +136,37 @@ export class BookingFormComponent {
       roomId: this.roomId,
       ...this.bookingForm.value,
     };
-     console.log('payload: ', payload);
-     this.bookingService.checkAvailability(
+    console.log('payload: ', payload);
+    this.bookingService.checkAvailability(
       payload.roomId,
       // payload.checkInDate.setHours(12, 0, 0, 0),
       // payload.checkOutDate.setHours(12, 0, 0, 0), 
       payload.checkInDate.setHours(12, 0, 0, 0),
-      payload.checkOutDate.setHours(12, 0, 0, 0),         
-      payload.guestCount
-     ).subscribe((result:any) => {
-        console.log(result);
-        if(result.success){
-          localStorage.setItem('roomDetails',JSON.stringify(result.roomDetails) );
-          localStorage.setItem('roomId',payload.roomId);
-          localStorage.setItem('checkInDate',payload.checkInDate.setHours(12, 0, 0, 0));
-          localStorage.setItem('checkOutDate',payload.checkOutDate.setHours(12, 0, 0, 0));
-          localStorage.setItem('guestCount',payload.guestCount);
-          this.router.navigateByUrl('/bookings/checkout')
-        }        
-      },
-        (err) => {
-          console.error('Booking failed:', err);
-          if (!err.error.success) {
-            this.bookingError = err.error;
-          }
+      payload.checkOutDate.setHours(12, 0, 0, 0),
+      // payload.guestCount
+      payload.adultCount,
+      payload.childCount
+    ).subscribe((result: any) => {
+      console.log(result);
+      if (result.success) {
+        localStorage.setItem('roomDetails', JSON.stringify(result.roomDetails));
+        localStorage.setItem('roomId', payload.roomId);
+        localStorage.setItem('checkInDate', payload.checkInDate.setHours(12, 0, 0, 0));
+        localStorage.setItem('checkOutDate', payload.checkOutDate.setHours(12, 0, 0, 0));
+        // localStorage.setItem('guestCount', payload.guestCount);
+        localStorage.setItem('adultCount', payload.adultCount);
+        localStorage.setItem('childCount', payload.childCount);
+        this.router.navigateByUrl('/bookings/checkout')
+      }
+    },
+      (err) => {
+        console.error('Booking failed:', err);
+        if (!err.error.success) {
+          this.bookingError = err.error;
         }
-      )
-    
+      }
+    )
+
   }
 
   populateDisabledDates() {

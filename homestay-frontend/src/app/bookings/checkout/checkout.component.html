@@ -18,7 +18,9 @@
       <p><strong>Room:</strong> {{ booking.roomName }}</p>
       <p><strong>Check-In:</strong> {{ booking.checkIn | date:'mediumDate' }}</p>
       <p><strong>Check-Out:</strong> {{ booking.checkOut | date:'mediumDate' }}</p>
-      <p><strong>Guest Count:</strong> {{ booking.guestCount }}</p>
+      <!-- <p><strong>Guest Count:</strong> {{ booking.guestCount }}</p> -->
+      <p><strong>Adults:</strong> {{ booking.adultCount }}</p>
+      <p><strong>Children:</strong> {{ booking.childCount }}</p>
       <p><strong>Total Nights:</strong> {{ booking.totalNights }}</p>
       <p><strong>Total Price:</strong> ₹{{ booking.totalPrice }}</p>
     </div>

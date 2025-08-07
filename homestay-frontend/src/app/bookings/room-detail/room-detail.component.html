@@ -8,13 +8,9 @@
 
   <!-- Thumbnails -->
   <div class="flex gap-4 mt-4 overflow-x-auto">
-    <img
-      *ngFor="let img of roomData.images"
-      [src]="img"
-      (click)="onImageClick(img)"
+    <img *ngFor="let img of roomData.images" [src]="img" (click)="onImageClick(img)"
       [class.border-blue-500]="img === selectedImage"
-      class="w-24 h-24 object-cover rounded cursor-pointer border-2 transition hover:scale-105"
-    />
+      class="w-24 h-24 object-cover rounded cursor-pointer border-2 transition hover:scale-105" />
   </div>
 
   <!-- Room Details -->
@@ -23,15 +19,16 @@
     <p><strong>Location:</strong> {{ roomData.location?.city }}, {{ roomData.location?.state }}</p>
     <p><strong>Price:</strong> ₹{{ roomData.price }}</p>
     <p><strong>Amenities:</strong> {{ roomData.amenities?.join(', ') || 'N/A' }}</p>
+    <p><strong>Max Adult Allowed:</strong> {{ roomData.maximumAllowedAdult || 0 }}</p>
+    <p><strong>Max Child Allowed:</strong> {{  roomData.maximumAllowedChild || 0 }}</p>
     <!-- <p>
-      <strong>Approved:</strong>
-      <span [ngClass]="roomData.isApproved ? 'text-green-600 font-semibold' : 'text-red-500 font-semibold'">
-        {{ roomData.isApproved ? 'Yes' : 'No' }}
-      </span>
+      <strong>Guests:</strong>
+      {{ roomData.maximumAllowedAdult }} Adult{{ roomData.maximumAllowedAdult > 1 ? 's' : '' }},
+      {{ roomData.maximumAllowedChild }} Child{{ roomData.maximumAllowedChild > 1 ? 'ren' : '' }}
     </p> -->
   </div>
   <div class="mt-8 text-center">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
-                (click)="proceedToBookRoom(roomId)">Book Now</button>
-</div>
+    <button class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded"
+      (click)="proceedToBookRoom(roomId)">Book Now</button>
+  </div>
 </div>
