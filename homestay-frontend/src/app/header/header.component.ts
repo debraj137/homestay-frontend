@@ -9,6 +9,7 @@ import { BookingService } from '../bookings/booking.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  isMobileMenuOpen = false;
   constructor(
     public authService: AuthService,
     private router: Router,

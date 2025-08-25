@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 export class ApprovedRoomComponent implements OnInit {
   city!: string;
   rooms: Room[] = [];
-  amenities = []
+  amenities = [];
+  loading: boolean = true;
   constructor(private bookingService: BookingService, private router: Router) { }
   ngOnInit(): void {
     // this.city = localStorage.getItem("city") || '';
@@ -36,12 +37,14 @@ export class ApprovedRoomComponent implements OnInit {
         console.log('approved room: ', result);
         this.rooms = result;
         // this.amenities = result.amenities
+        this.loading = false;
       });
     }
     else {
       this.bookingService.getRoomByCity(this.city).subscribe((result: any) => {
         console.log('room by city: ', result);
         this.rooms = result;
+        this.loading = false;
       });
     }
   }

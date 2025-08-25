@@ -1,5 +1,5 @@
-<div class="p-6">
-  <h2 class="text-2xl font-bold mb-4">Bookings for Room</h2>
+<!-- <div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Bookings for Selected Room</h2>
 
   <table class="min-w-full text-left border border-gray-300">
     <thead class="bg-blue-100">
@@ -23,4 +23,35 @@
       </tr>
     </tbody>
   </table>
+</div> -->
+
+
+<!-- responsive -->
+ <div class="p-4 sm:p-6">
+  <h2 class="text-2xl font-bold mb-4">Bookings for Selected Room</h2>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-left border border-gray-300">
+      <thead class="bg-blue-100 text-sm sm:text-base">
+        <tr>
+          <th class="px-4 py-2 whitespace-nowrap">Customer Name</th>
+          <th class="px-4 py-2 whitespace-nowrap">Mobile</th>
+          <th class="px-4 py-2 whitespace-nowrap">Email</th>        
+          <th class="px-4 py-2 whitespace-nowrap">Check-In</th>
+          <th class="px-4 py-2 whitespace-nowrap">Check-Out</th>       
+          <th class="px-4 py-2 whitespace-nowrap">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings" class="hover:bg-blue-50 border-b border-gray-200 text-sm sm:text-base">
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.userId?.name || 'N/A' }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.userId?.mobileNumber || '-' }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.userId?.email || '-' }}</td>       
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.checkInDate | date }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.checkOutDate | date }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ booking.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="p-6">
+<!-- <div class="p-6">
   <h1 class="text-2xl font-bold mb-4">Your Rooms</h1>
 
   <table class="min-w-full text-left border border-gray-300 mb-6">
@@ -48,4 +48,66 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
+
+
+
+
+<!-- responsive -->
+<div class="p-4 sm:p-6">
+  <h1 class="text-xl sm:text-2xl font-bold mb-4">Your Rooms</h1>
+
+  <!-- Table Wrapper for Horizontal Scroll on Small Screens -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-left border border-gray-300 mb-6">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 whitespace-nowrap">Room Name</th>
+          <th class="px-4 py-2 whitespace-nowrap">Max Allowed Adult</th>
+          <th class="px-4 py-2 whitespace-nowrap">Max Allowed Child</th>
+          <th class="px-4 py-2 whitespace-nowrap">Price</th>
+          <th class="px-4 py-2 whitespace-nowrap">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of ownerRooms" class="hover:bg-gray-50 border-b border-gray-200">
+          <td class="px-4 py-2 whitespace-nowrap">{{ room.title }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ room.maximumAllowedAdult }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">{{ room.maximumAllowedChild }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">₹{{ room.price }}</td>
+          <td class="px-4 py-2 whitespace-nowrap">
+            <button [routerLink]="['/rooms/view-booking', room._id]" class="text-blue-600 hover:underline">
+              View Bookings
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Bookings Table -->
+  <div *ngIf="selectedRoomId" class="mt-8">
+    <h2 class="text-lg sm:text-xl font-semibold mb-4">Bookings for Selected Room</h2>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-left border border-gray-300">
+        <thead class="bg-blue-100">
+          <tr>
+            <th class="px-4 py-2 whitespace-nowrap">User</th>
+            <th class="px-4 py-2 whitespace-nowrap">Mobile</th>
+            <th class="px-4 py-2 whitespace-nowrap">Check-In</th>
+            <th class="px-4 py-2 whitespace-nowrap">Check-Out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of getFilteredBookings()" class="hover:bg-blue-50 border-b border-gray-200">
+            <td class="px-4 py-2 whitespace-nowrap">{{ booking.userId?.name || 'N/A' }}</td>
+            <td class="px-4 py-2 whitespace-nowrap">{{ booking.userId?.mobileNumber || '-' }}</td>
+            <td class="px-4 py-2 whitespace-nowrap">{{ booking.checkInDate | date }}</td>
+            <td class="px-4 py-2 whitespace-nowrap">{{ booking.checkOutDate | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> 

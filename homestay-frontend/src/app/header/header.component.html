@@ -1,13 +1,13 @@
-<nav class="bg-white shadow sticky top-0 z-50">
+<!-- <nav class="bg-white shadow sticky top-0 z-50">
   <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
 
-      <!-- Logo -->
+
       <a href="/" class="flex items-center space-x-2">
         <img src="stay.png" alt="STAY Logo" class="h-16 w-auto" />
       </a>
 
-      <!-- Desktop Menu -->
+
       <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-700 gap-11">
         <div class="flex gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -74,7 +74,7 @@
             @else {
             <a href="#" class="hover:text-red-600" routerLink="/auth/login">Login / Signup</a>
             }
-            <!-- <p class="text-xs text-gray-500">Start earinig in 30 mins</p> -->
+
           </div>
         </div>
       </div>
@@ -96,4 +96,160 @@
       <li (click)="randomFunc('Meerut')">Meerut</li>
     </ul>
   </div>
+</div> -->
+
+
+
+
+
+
+
+
+<!-- reesponsive  -->
+<!-- Navigation Bar -->
+<nav class="bg-white shadow sticky top-0 z-50">
+  <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2">
+        <img src="stay.png" alt="STAY Logo" class="h-16 w-auto" />
+      </a>
+
+      <!-- Hamburger Menu (mobile) -->
+      <div class="md:hidden">
+        <button (click)="isMobileMenuOpen = !isMobileMenuOpen" class="text-gray-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700">
+
+        <!-- Admin/Owner/User Options -->
+        <ng-container *ngIf="authService.isAdmin; else notAdmin">
+          <a class="hover:text-red-600" routerLink="/admin">Pending Property</a>
+          <a class="hover:text-red-600" routerLink="/admin/approved-room">Approved Property</a>
+          <a class="hover:text-red-600" routerLink="/admin/owner-list">Owner List</a>
+          <a class="hover:text-red-600" routerLink="/admin/all-booking">All Booking</a>
+        </ng-container>
+
+        <ng-template #notAdmin>
+          <ng-container *ngIf="authService.isOwner; else userMenu">
+            <a class="hover:text-red-600" routerLink="/rooms">Listed Property</a>
+            <a class="hover:text-red-600" routerLink="/rooms/booked-room">Property List</a>
+          </ng-container>
+        </ng-template>
+
+        <ng-template #userMenu>
+          <div class="flex gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
+            </svg>
+            <div>
+              <a class="hover:text-red-600 cursor-pointer" (click)="listProperty()">List Your Property</a>
+              <p class="text-xs text-gray-500">Start earning in 30 mins</p>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <div>
+              <a class="hover:text-red-600 cursor-pointer" routerLink="/bookings/my-booking">My Booking</a>
+              <p class="text-xs text-gray-500">See your booked rooms</p>
+            </div>
+          </div>
+
+        </ng-template>
+
+        <!-- Contact Info -->
+        <div class="flex gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+          </svg>
+          <div class="flex flex-col">
+            <a href="#" class="hover:text-red-600">0124-6201611</a>
+            <p class="text-xs text-gray-500">Call us to Book now</p>
+          </div>
+        </div>
+
+        <!-- Login/Logout -->
+        <div class="flex gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <div>
+            <ng-container *ngIf="authService.isLoggedIn; else login">
+              <a href="#" class="hover:text-red-600" (click)="logout()">Logout</a>
+            </ng-container>
+            <ng-template #login>
+              <a href="#" class="hover:text-red-600" routerLink="/auth/login">Login / Signup</a>
+            </ng-template>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden" *ngIf="isMobileMenuOpen">
+    <div class="px-4 pb-4 space-y-4 text-sm font-medium text-gray-700">
+
+      <ng-container *ngIf="authService.isAdmin; else notAdminMobile">
+        <a class="block hover:text-red-600" routerLink="/admin">Pending Property</a>
+        <a class="block hover:text-red-600" routerLink="/admin/approved-room">Approved Property</a>
+        <a class="block hover:text-red-600" routerLink="/admin/owner-list">Owner List</a>
+        <a class="block hover:text-red-600" routerLink="/admin/all-booking">All Booking</a>
+      </ng-container>
+
+      <ng-template #notAdminMobile>
+        <ng-container *ngIf="authService.isOwner; else userMenuMobile">
+          <a class="block hover:text-red-600" routerLink="/rooms">Listed Property</a>
+          <a class="block hover:text-red-600" routerLink="/rooms/booked-room">Property List</a>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #userMenuMobile>
+        <a class="block hover:text-red-600" (click)="listProperty()">List Your Property</a>
+        <a class="block hover:text-red-600" routerLink="/bookings/my-booking">My Booking</a>
+      </ng-template>
+
+      <a class="block hover:text-red-600">📞 0124-6201611</a>
+
+      <ng-container *ngIf="authService.isLoggedIn; else loginMobile">
+        <a class="block hover:text-red-600" (click)="logout()">Logout</a>
+      </ng-container>
+      <ng-template #loginMobile>
+        <a class="block hover:text-red-600" routerLink="/auth/login">Login / Signup</a>
+      </ng-template>
+    </div>
+  </div>
+</nav>
+
+<!-- Horizontal City List -->
+<div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 lg:py-2 lg:flex lg:justify-between lg:items-center bg-gray-200 overflow-x-auto">
+  <ul class="flex gap-6 lg:gap-20 whitespace-nowrap py-3 text-sm text-gray-700">
+    <li (click)="randomFunc('Ayodhya')" class="cursor-pointer hover:text-red-600">Ayodhya</li>
+    <li (click)="randomFunc('Lucknow')" class="cursor-pointer hover:text-red-600">Lucknow</li>
+    <li (click)="randomFunc('Varanasi')" class="cursor-pointer hover:text-red-600">Varanasi</li>
+    <li (click)="randomFunc('Noida')" class="cursor-pointer hover:text-red-600">Noida</li>
+    <li (click)="randomFunc('Gorakhpur')" class="cursor-pointer hover:text-red-600">Gorakhpur</li>
+    <li (click)="randomFunc('Mathura')" class="cursor-pointer hover:text-red-600">Mathura</li>
+    <li (click)="randomFunc('Vrindavan')" class="cursor-pointer hover:text-red-600">Vrindavan</li>
+    <li (click)="randomFunc('Prayagraj')" class="cursor-pointer hover:text-red-600">Prayagraj</li>
+    <li (click)="randomFunc('Agra')" class="cursor-pointer hover:text-red-600">Agra</li>
+    <li (click)="randomFunc('Meerut')" class="cursor-pointer hover:text-red-600">Meerut</li>
+  </ul>
 </div>

@@ -81,4 +81,15 @@ export class HomeComponent implements OnInit {
   viewDetails(roomId: string) {
     // Navigate or show modal with room details
   }
+  proceedToBookRoom(roomId: string) {
+    console.log(roomId);
+    localStorage.setItem('roomId', roomId);
+    console.log('clicked');
+    this.router.navigateByUrl('/bookings/book-room');
+  }
+
+  roomDetails(roomId: string) {
+    localStorage.setItem('roomId', roomId);
+    this.router.navigateByUrl('/bookings/room-detail');
+  }
 }
