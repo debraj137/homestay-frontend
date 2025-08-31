@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   goldrooms: Room[] = [];
   silverrooms: Room[] = [];
   diamondrooms: Room[] = [];
+  errorMessage: string = '';
   constructor(private router: Router, private bookingService: BookingService, private roomService: RoomService) {
 
   }
@@ -35,10 +36,21 @@ export class HomeComponent implements OnInit {
   randomFunc(e: any) {
     console.log(typeof e);
     // localStorage.setItem('city',e);
+    if (!e || e.trim().length === 0) {   // 👈 check if empty
+      this.errorMessage = "Please enter a city name";
+      return;
+    }
+    this.errorMessage = '';
     this.bookingService.citySubject.next(e);
     // debugger;
     console.log('clicked');
     this.router.navigateByUrl('/bookings')
+  }
+
+  clearError() {
+    if (this.errorMessage) {
+      this.errorMessage = '';
+    }
   }
 
   getGoldRooms() {

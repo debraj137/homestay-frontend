@@ -14,14 +14,19 @@
 
     <!-- Search -->
     <div
-      class="w-full max-w-2xl mx-auto flex items-center bg-white rounded-xl shadow-md overflow-hidden ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-red-400 transition">
+      class="w-full max-w-2xl mx-auto flex items-center bg-white rounded-xl shadow-md overflow-hidden ring-1 ring-gray-200 focus-within:ring-2 focus-within:ring-red-400 transition"
+      (input)="clearError()">
       <input type="text" #cityInput placeholder="Enter city name (e.g. Ayodhya, Varanasi)"
         class="flex-1 h-12 px-5 text-gray-800 text-base placeholder-gray-400 focus:outline-none" [(ngModel)]="city" />
-      <button [disabled]="!city"
+      <button
         class="h-12 px-6 bg-red-500 hover:bg-red-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 ease-in-out"
         (click)="randomFunc(city)">
         Search
       </button>
+    </div>
+    <!-- 👇 Error Message -->
+    <div *ngIf="errorMessage" class="text-red-500 mt-2 text-sm font-medium">
+      {{ errorMessage }}
     </div>
   </div>
 </section>
