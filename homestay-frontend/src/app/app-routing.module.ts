@@ -4,8 +4,12 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './shared/auth.guard';
 import { adminGuard } from './shared/admin.guard';
 import { ownerGuard } from './shared/owner.guard';
+import { TermsnconditionsComponent } from './footer/termsnconditions/termsnconditions.component';
+import { CancellationPolicyComponent } from './footer/cancellation-policy/cancellation-policy.component';
 
 const routes: Routes = [
+  {path: 'terms-and-conditions', component: TermsnconditionsComponent},
+  {path: 'cancellation-policy', component: CancellationPolicyComponent},
   {path: 'home', component: HomeComponent, 
     // canActivate: [authGuard]
   },
@@ -31,7 +35,8 @@ const routes: Routes = [
   // { path: '', redirectTo: '/rooms', pathMatch: 'full' },
   // { path: '**', redirectTo: '/rooms' }
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/home' },
+  
 ];
 
 @NgModule({

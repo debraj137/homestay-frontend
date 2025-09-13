@@ -10,6 +10,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
+import { TermsnconditionsComponent } from './footer/termsnconditions/termsnconditions.component';
+import { CancellationPolicyComponent } from './footer/cancellation-policy/cancellation-policy.component';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -19,6 +21,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
+    TermsnconditionsComponent,
+    CancellationPolicyComponent,
 
   ],
   imports: [
